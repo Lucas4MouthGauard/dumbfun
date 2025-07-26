@@ -247,7 +247,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nDUMBFUN Linux Terminal v1.0.0 - The Dumbest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft and other fun commands!`;
+        output = `\nDUMBFUN Linux Terminal v1.0.0 - The Dumbest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme and other fun commands!`;
         break;
       case 'clear':
         setCommands([]);
@@ -324,7 +324,23 @@ const App: React.FC = () => {
           'In the AI era, staying dumb is a superpower!',
           'In the Web3 world, even air can be an NFT!',
           'Blockchain: solving simple problems in the most complex way!',
-          'Smart contracts: making code more complicated than law!'
+          'Smart contracts: making code more complicated than law!',
+          // 新增幽默短语
+          '404: Intelligence Not Found.',
+          'Keep calm and pretend you know what you’re doing.',
+          'My code never bugs, it just develops random features.',
+          'Dumb is the new smart.',
+          'If at first you don’t succeed, call it a feature.',
+          'Why be smart when you can be happy?',
+          'In DumbFun we trust.',
+          'Reboot your brain, not just your computer.',
+          'Error: Brain.exe has stopped working.',
+          'I’m not lazy, I’m on energy-saving mode.',
+          'To debug or not to debug? That is the dumb question.',
+          'Ctrl + Alt + DumbFun.',
+          'Artificial Intelligence? I prefer Natural Dumbness.',
+          'I put the “fun” in “function not found”.',
+          'DumbFun: Because smart is overrated.'
         ];
         output = fortunes[Math.floor(Math.random() * fortunes.length)];
         break;
@@ -358,6 +374,13 @@ const App: React.FC = () => {
         break;
       case 'web3':
         output = `🌐 Web3 Explanation Time! 🌐\n\nWhat is Web3?\n\nOfficial definition: Next generation internet\n\nDumbFun definition: Make the internet more complicated\n\nWeb1: Read-only (like reading newspapers)\nWeb2: Read-write (like social media)\nWeb3: Read-write-own (like... I don\'t know what)\n\nWeb3 features:\n1. Decentralized (no center, but has centralized exchanges)\n2. Users own data (but data is public on blockchain)\n3. Privacy protection (but all transactions are public)\n4. Censorship resistant (but might be 51% attacked)\n\nSounds contradictory?\nYes! That\'s Web3!\n\nLike:\n- You say you want privacy, but make everything public\n- You say you want decentralization, but rely on centralized services\n- You say you want censorship resistance, but might be attacked\n\nIn the DumbFun world:\nWeb3 = Web Confused\n\nBut... at least it sounds cool! 😎`;
+        break;
+      case 'btc':
+      case 'bitcoin':
+        output = `₿ Bitcoin Explanation Time! ₿\n\nWhat is Bitcoin?\n\nOfficial definition: The first cryptocurrency\n\nDumbFun definition: Digital gold that nobody can find\n\nBitcoin facts:\n1. Created by Satoshi Nakamoto (who might be AI)\n2. Limited supply: 21 million (but most are lost)\n3. Mining: solving puzzles to create money\n4. Price: goes up when you sell, down when you buy\n\nWhy is it called Bitcoin?\n- Bit = smallest unit of data\n- Coin = money\n- So Bitcoin = smallest unit of digital money\n\nBut...\n- It\'s not really a coin\n- It\'s not really small\n- It\'s not really money (sometimes)\n\nIn the DumbFun world:\nBitcoin = Digital Hope\n\nYou hope it goes up, you hope it doesn\'t crash, you hope you don\'t lose your keys!\n\nRemember: HODL means Hold On for Dear Life! 💎🙌`;
+        break;
+      case 'meme':
+        output = `🎭 Meme Explanation Time! 🎭\n\nWhat is a Meme?\n\nOfficial definition: Cultural unit of information\n\nDumbFun definition: Internet\'s way of making fun of everything\n\nMeme types:\n1. Image macros (pictures with text)\n2. GIFs (moving pictures)\n3. Videos (short clips)\n4. Text (copypasta)\n5. NFTs (expensive memes)\n\nWhy do memes exist?\n- To make people laugh\n- To spread ideas\n- To waste time\n- To become rich (if you\'re lucky)\n\nIn the DumbFun world:\nMeme = Digital Happiness\n\nMemes are like:\n- Jokes that never get old\n- Pictures that speak louder than words\n- The internet\'s sense of humor\n- The reason why we can\'t have nice things\n\nBest meme ever: "This is fine" dog\nWorst meme ever: "Baby Shark"\n\nRemember: A meme a day keeps the doctor away! 😂`;
         break;
       case 'quit':
       case 'exit':
