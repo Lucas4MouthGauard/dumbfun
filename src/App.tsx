@@ -309,7 +309,7 @@ const App: React.FC = () => {
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the DumbFun world, even terminals can dance! 🎵`;
         break;
       case 'ca':
-        output = '12345678987654321';
+        output = '9hv2QkisdVKvYDq51mnG4WrrJvp2HPautHtmiMTbbonk';
         break;
       case 'fortune':
         const fortunes = [
