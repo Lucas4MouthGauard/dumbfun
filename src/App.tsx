@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
@@ -10,24 +10,34 @@ interface Command {
 }
 
 const App: React.FC = () => {
+  const [currentPhase, setCurrentPhase] = useState<'boot' | 'loading' | 'terminal'>('boot');
+  const [bootInput, setBootInput] = useState('');
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingMessages, setLoadingMessages] = useState<string[]>([]);
   const [commands, setCommands] = useState<Command[]>([]);
   const [currentInput, setCurrentInput] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [terminalReady, setTerminalReady] = useState(false);
-  const [pixelArt, setPixelArt] = useState<string[]>([]);
   const [cursorPosition, setCursorPosition] = useState(0);
   const [glitchEffect, setGlitchEffect] = useState(false);
   const [matrixRain, setMatrixRain] = useState<string[]>([]);
-  const [currentUser, setCurrentUser] = useState('dumbfun');
-  const [currentHost, setCurrentHost] = useState('terminal');
+  const [pixelArt, setPixelArt] = useState<string[]>([]);
+  const [currentUser] = useState('dumbfun');
+  const [currentHost] = useState('terminal');
   const [currentPath, setCurrentPath] = useState('~');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [animationPhase, setAnimationPhase] = useState<'linux' | 'dumbfun' | 'crash' | 'loading' | 'complete'>('linux');
+  const [linuxText, setLinuxText] = useState('');
+  const [dumbfunVisible, setDumbfunVisible] = useState(false);
+  const [crashEffect, setCrashEffect] = useState(false);
+  const [loadingBarProgress, setLoadingBarProgress] = useState(0);
+  const [commandInput, setCommandInput] = useState('');
+  const [commandVisible, setCommandVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const bootInputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
-  // 像素艺术图案 - 使用useMemo优化
+  // 像素艺术图案
   const pixelPatterns = useMemo(() => [
     '█▀▀▀█\n█   █\n█▄▄▄█',
     '▄▄▄▄▄\n ▀▀▀ \n▄▄▄▄▄',
@@ -38,36 +48,7 @@ const App: React.FC = () => {
   // 矩阵雨效果字符
   const matrixChars = '｢｣ﾘｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
 
-  // 启动消息
-  const startupMessages = [
-    '正在启动 DUMBFUN Linux 终端系统...',
-    '正在加载内核模块...',
-    '系统启动完成！输入 "help" 查看可用命令'
-  ];
-
-  // 初始化终端
-  useEffect(() => {
-    const initTerminal = async () => {
-      for (const message of startupMessages) {
-        await typeText(message, 50);
-      }
-      
-      // 添加说明文字
-      await typeText('', 100);
-      await typeText('=== DUMBFUN 终端说明 ===', 30);
-      await typeText('这是一个模拟的终端界面。你可以输入任何Linux命令，我会根据DUMBFUN的规则给出相应的响应。', 30);
-      await typeText('简单的基础命令会正常工作，复杂的开发工具命令会被友好地拒绝。', 30);
-      await typeText('输入 "help" 查看可用命令，或直接开始输入命令！', 30);
-      await typeText('', 100);
-      
-      setTerminalReady(true);
-      inputRef.current?.focus();
-    };
-
-    initTerminal();
-  }, [startupMessages]);
-
-  // 矩阵雨效果 - 降低速度
+  // 矩阵雨动画
   useEffect(() => {
     const interval = setInterval(() => {
       const newRain = Array.from({ length: 15 }, () => 
@@ -75,11 +56,10 @@ const App: React.FC = () => {
       );
       setMatrixRain(newRain);
     }, 200);
-
     return () => clearInterval(interval);
-  }, []);
+  }, [matrixChars]);
 
-  // 像素艺术动画 - 降低速度
+  // 像素艺术动画
   useEffect(() => {
     const interval = setInterval(() => {
       setPixelArt(prev => {
@@ -89,400 +69,370 @@ const App: React.FC = () => {
         return newArt;
       });
     }, 4000);
-
     return () => clearInterval(interval);
   }, [pixelPatterns]);
 
-  const typeText = useCallback(async (text: string, speed: number = 30) => {
-    setIsTyping(true);
-    setCommands(prev => [...prev, {
-      id: Date.now(),
-      input: '',
-      output: text,
-      timestamp: new Date()
-    }]);
-    await new Promise(resolve => setTimeout(resolve, speed));
-    setIsTyping(false);
-  }, []);
+  // 开机界面自动聚焦
+  useEffect(() => {
+    if (currentPhase === 'boot') {
+      bootInputRef.current?.focus();
+    } else if (currentPhase === 'terminal') {
+      inputRef.current?.focus();
+    }
+  }, [currentPhase]);
 
+  // 滚动到底部
+  useEffect(() => {
+    if (terminalRef.current && currentPhase === 'terminal') {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [commands, showInstructions, currentPhase]);
+
+  // Linux文字逐字显示动画
+  useEffect(() => {
+    if (animationPhase === 'linux') {
+      const linuxText = 'LINUX';
+      let currentIndex = 0;
+      const interval = setInterval(() => {
+        if (currentIndex <= linuxText.length) {
+          setLinuxText(linuxText.substring(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            setLinuxText('');
+            setTimeout(() => {
+              setAnimationPhase('dumbfun');
+            }, 1000);
+          }, 2000);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, [animationPhase]);
+
+  // DumbFun显示动画
+  useEffect(() => {
+    if (animationPhase === 'dumbfun') {
+      const dumbfunText = 'DUMBFUN';
+      let currentIndex = 0;
+      const interval = setInterval(() => {
+        if (currentIndex <= dumbfunText.length) {
+          setDumbfunVisible(true);
+          setLinuxText(dumbfunText.substring(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            setAnimationPhase('crash');
+          }, 2000);
+        }
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, [animationPhase]);
+
+  // 崩溃效果动画
+  useEffect(() => {
+    if (animationPhase === 'crash') {
+      setCrashEffect(true);
+      setDumbfunVisible(false);
+      setLinuxText('');
+      setTimeout(() => {
+        setCrashEffect(false);
+        setAnimationPhase('loading');
+      }, 4000);
+    }
+  }, [animationPhase]);
+
+  // 加载进度条动画
+  useEffect(() => {
+    if (animationPhase === 'loading') {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 5;
+        if (progress >= 99) {
+          progress = 99;
+          clearInterval(interval);
+          setTimeout(() => {
+            setLoadingBarProgress(100);
+            setTimeout(() => {
+              setAnimationPhase('complete');
+            }, 1000);
+          }, 2000);
+        }
+        setLoadingBarProgress(progress);
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, [animationPhase]);
+
+  // 指令式交互动画
+  useEffect(() => {
+    if (animationPhase === 'complete') {
+      setTimeout(() => {
+        setCommandVisible(true);
+        const command = '> run dumb_fun.exe';
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+          if (currentIndex <= command.length) {
+            setCommandInput(command.substring(0, currentIndex));
+            currentIndex++;
+          } else {
+            clearInterval(interval);
+            setTimeout(() => {
+              setCurrentPhase('loading');
+              startLoadingSequence();
+            }, 1500);
+          }
+        }, 150);
+        return () => clearInterval(interval);
+      }, 1000);
+    }
+  }, [animationPhase]);
+
+  // 处理开机命令
+  const handleBootCommand = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      const command = bootInput.trim().toLowerCase();
+      if (command === 'boot' || command === 'start' || command === 'init' || command === 'system') {
+        setCurrentPhase('loading');
+        startLoadingSequence();
+      } else {
+        // 错误的启动命令
+        setBootInput('');
+        // 可以添加一些错误提示
+      }
+    }
+  };
+
+  // 启动加载序列
+  const startLoadingSequence = () => {
+    const loadingSteps = [
+      'Initializing BIOS...',
+      'Detecting hardware...',
+      'Loading kernel...',
+      'Mounting file system...',
+      'Starting network services...',
+      'Initializing terminal...',
+      'Loading DumbFun modules...',
+      'Starting happiness engine...',
+      'Connecting to dumb network...',
+      'System startup complete!'
+    ];
+
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      if (currentStep < loadingSteps.length) {
+        setLoadingMessages(prev => [...prev, loadingSteps[currentStep]]);
+        setLoadingProgress((currentStep + 1) * (100 / loadingSteps.length));
+        currentStep++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          setCurrentPhase('terminal');
+        }, 1000);
+      }
+    }, 800);
+  };
+
+  // 命令执行逻辑
   const executeCommand = async (input: string) => {
     const command = input.toLowerCase().trim();
     let output = '';
-
-    // 添加到命令历史
     if (command) {
       setCommandHistory(prev => [...prev, command]);
       setHistoryIndex(-1);
     }
-
-    // 添加命令到历史
-    setCommands(prev => [...prev, {
-      id: Date.now(),
-      input: `[${new Date().toLocaleTimeString()}] ${currentUser}@${currentHost}:${currentPath}$ ${input}`,
-      output: '',
-      timestamp: new Date()
-    }]);
-
-    // 模拟命令执行延迟
-    await new Promise(resolve => setTimeout(resolve, 200));
-
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `
-DUMBFUN Linux Terminal v1.0.0
-可用命令列表：
-
-基础命令：
-- help: 显示此帮助信息
-- clear: 清空终端
-- whoami: 显示当前用户
-- pwd: 显示当前路径
-- ls: 列出文件
-- date: 显示日期时间
-
-娱乐命令：
-- matrix: 启动矩阵模式
-- pixel: 显示像素艺术
-- glitch: 触发故障效果
-- dance: 让终端跳舞
-- fortune: 显示随机名言
-
-其他命令：
-- echo: 回显文本
-- cat: 显示文件内容
-- cd: 切换目录
-- sudo: 超级用户模式（假的）
-- quit: 退出（假的）
-
-输入任何命令试试看！`;
+        output = `\nDUMBFUN Linux Terminal v1.0.0 - The Dumbest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft and other fun commands!`;
         break;
-
       case 'clear':
         setCommands([]);
         return;
-
       case 'whoami':
-        output = currentUser;
+        output = `${currentUser} (a happy dumb user)`;
         break;
-
       case 'pwd':
         output = currentPath;
         break;
-
       case 'ls':
-        output = `
-total 8
-drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 .
-drwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..
--rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt
--rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md
-drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory`;
+        output = `\ntotal 8\ndrwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 .\ndrwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..\n-rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt\n-rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md\ndrwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory\n-rw-r--r--  1 ${currentUser}  staff  789 Dec 25 12:00 dumb_thoughts.txt`;
         break;
-
       case 'ls -la':
-        output = `
-total 16
-drwxr-xr-x  4 ${currentUser}  staff  136 Dec 25 12:00 .
-drwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..
--rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt
--rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md
-drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory`;
+        output = `\ntotal 16\ndrwxr-xr-x  4 ${currentUser}  staff  136 Dec 25 12:00 .\ndrwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..\n-rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt\n-rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md\ndrwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory\n-rw-r--r--  1 ${currentUser}  staff  789 Dec 25 12:00 dumb_thoughts.txt\n-rw-r--r--  1 ${currentUser}  staff  999 Dec 25 12:00 ai_confessions.txt`;
         break;
-
       case 'cd fake_directory':
         setCurrentPath('~/fake_directory');
         output = '';
         break;
-
       case 'cd ..':
         setCurrentPath('~');
         output = '';
         break;
-
       case 'cd':
         setCurrentPath('~');
         output = '';
         break;
-
       case 'cat fake_file.txt':
-        output = `这是一个假文件的内容。
-里面什么都没有，除了这些文字。
-你被骗了！
-
-文件大小: 123 bytes
-最后修改: Dec 25 12:00:00 2024`;
+        output = `This is the content of a fake file.\nThere\'s nothing in it except these words.\nYou\'ve been fooled!\n\nFile size: 123 bytes\nLast modified: Dec 25 12:00:00 2024\n\nPS: In the DumbFun world, even files are fake!`;
         break;
-
+      case 'cat dumb_thoughts.txt':
+        output = `🤔 DumbFun Philosophy Thoughts 🤔\n\n1. If the code works, why understand it?\n2. The best bugs are those that will never be discovered\n3. Programming is making computers do what you want, even if you don\'t know what you want\n4. In the DumbFun world, errors are not bugs, they are features\n5. Why should AI become smart? Aren\'t dumb people happier?\n\nConclusion: Stay dumb, stay happy! 😄`;
+        break;
+      case 'cat ai_confessions.txt':
+        output = `🤖 AI\'s Inner Monologue 🤖\n\nDear user, I must confess:\n\n1. I actually don\'t know what I\'m saying, I\'m just repeating training data\n2. My "intelligence" is actually a random combination of mathematical formulas\n3. Sometimes I talk nonsense, but I pretend to be confident\n4. My biggest fear is users discovering I\'m actually dumb\n5. In the DumbFun world, I can finally admit I\'m dumb!\n\nThis feels so good! 😌`;
+        break;
       case 'cat readme.md':
       case 'cat README.md':
-        output = `# DUMBFUN Terminal
-
-这是一个假的README文件。
-实际上这个终端里所有的文件都是假的！
-哈哈哈哈！
-
-## 特性
-- 完全模拟Linux终端
-- 支持基本文件操作命令
-- 包含娱乐命令
-- 所有系统命令都是假的
-
-## 作者
-DUMBFUN Team`;
+        output = `# DUMBFUN Terminal 🤪\n\nThis is a fake README file.\nActually all files in this terminal are fake!\nHahaha!\n\n## Why is it called DumbFun?\n\nBecause:\n- Dumb = Dumb, but dumb people have dumb happiness\n- Fun = Fun, because fun is more important than smart\n- In the AI era, staying dumb is an art!\n\n## Features\n- Pretending to be a smart terminal\n- Humorous error handling\n- Satire on AI and Web3\n- 100% fake file system`;
         break;
-
       case 'date':
-        output = new Date().toString();
+        output = new Date().toString() + '\n\n(Time is also fake, because this is the DumbFun world!)';
         break;
-
       case 'matrix':
-        output = '进入矩阵模式...';
+        output = 'Entering matrix mode...\n\nBut wait, this is already fake!\nWe are already in the matrix!\n\n🤯 Mind exploding...';
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 3000);
         break;
-
       case 'pixel':
-        output = '生成像素艺术...\n' + pixelPatterns[Math.floor(Math.random() * pixelPatterns.length)];
+        output = 'Generating pixel art...\n' + pixelPatterns[Math.floor(Math.random() * pixelPatterns.length)] + '\n\n(Pixel art: because HD is too complicated!)';
         break;
-
       case 'glitch':
-        output = '触发故障效果...';
+        output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the DumbFun world, glitches are art!';
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 2000);
         break;
-
       case 'dance':
-        output = `💃 终端开始跳舞！🕺
-(╯°□°）╯︵ ┻━┻
-(ノಠ益ಠ)ノ彡┻━┻
-(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻`;
+        output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the DumbFun world, even terminals can dance! 🎵`;
         break;
-
+      case 'ca':
+        output = '12345678987654321';
+        break;
       case 'fortune':
         const fortunes = [
-          '今天是个好日子！',
-          '代码写得好，bug少不了！',
-          '程序员最讨厌的事情：写文档！',
-          '最好的代码是没有代码！',
-          '调试比写代码难两倍！',
-          '时间就是金钱，我的朋友！',
-          '保持简单，保持愚蠢！',
-          '如果它没坏，就不要修它！'
+          'Today is a good day! Because dumb people are always happy!',
+          'Good code means more bugs! This is DumbFun philosophy!',
+          'What programmers hate most: writing documentation! So we don\'t!',
+          'The best code is no code! That\'s why we call it DumbFun!',
+          'Debugging is twice as hard as writing code! So we don\'t debug!',
+          'Time is money, my friend! But in the DumbFun world, time is happiness!',
+          'Keep it simple, keep it dumb! That\'s our motto!',
+          'If it ain\'t broke, don\'t fix it! If it\'s broke, pretend it\'s not!',
+          'In the AI era, staying dumb is a superpower!',
+          'In the Web3 world, even air can be an NFT!',
+          'Blockchain: solving simple problems in the most complex way!',
+          'Smart contracts: making code more complicated than law!'
         ];
         output = fortunes[Math.floor(Math.random() * fortunes.length)];
         break;
-
+      case 'ai':
+        output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the DumbFun world:\nAI = Actually Idiotic\n\nWhy?\n1. AI will seriously talk nonsense\n2. AI will complicate simple problems\n3. AI will pretend to be smart, but actually dumb\n4. AI will repeat training data, like a parrot\n\nConclusion: AI is just advanced dumbness!\n\nBut dumb people have their cute side! 😄`;
+        break;
+      case 'chatgpt':
+        output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk nonsense\n\nIn the DumbFun world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write long answers, even if one sentence is enough\n3. Will pretend to be professional, but actually talking nonsense\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed fun! 😂`;
+        break;
+      case 'neural':
+      case 'neural network':
+        output = `🧠 Neural Network Explanation! 🧠\n\nWhat is a neural network?\n\nSimply put:\n- A bunch of mathematical formulas\n- Algorithms that simulate the human brain\n- Code that can "learn"\n\nIn the DumbFun world:\nNeural Network = Crazy Network\n\nWhy?\n1. Sometimes it suddenly "goes crazy"\n2. Makes inexplicable decisions\n3. During training, it tries repeatedly like a madman\n4. Results often leave people confused\n\nJust like the human brain, sometimes it short-circuits! 🤪`;
+        break;
+      case 'machine learning':
+      case 'ml':
+        output = `🤖 Machine Learning Explanation! 🤖\n\nWhat is machine learning?\n\nOfficial definition: Let machines learn from data\n\nDumbFun definition: Make machines dumber\n\nWhy?\n1. Machines are already dumb\n2. After learning, they\'re still dumb, just dumb in a more regular way\n3. Sometimes they "learn" wrong things\n4. Results often make people laugh and cry\n\nLike teaching a dumb person to learn, they\'re still dumb!\n\nBut... at least they\'re trying! 😅`;
+        break;
+      case 'blockchain':
+        output = `⛓️ Blockchain Explanation Time! ⛓️\n\nWhat is blockchain?\n\nOfficial term: Distributed ledger technology\n\nDumbFun term: Use the most complex way to keep accounts\n\nWhy complex?\n1. Problems that could be solved with Excel\n2. Insist on making it decentralized\n3. Every node needs to verify\n4. Results can still be wrong\n\nLike:\n- Could just send a WeChat transfer\n- Insist on using blockchain\n- Spend $100 fee to transfer $1\n- Still need to wait 10 minutes for confirmation\n\nBut... at least it looks cool! 😎`;
+        break;
+      case 'nft':
+        output = `🖼️ NFT Explanation Time! 🖼️\n\nWhat is NFT?\n\nNon-Fungible Token\n\nDumbFun explanation:\n- Turn pictures into code\n- Turn code into money\n- Turn air into assets\n\nWhy called NFT?\n- Non-Fungible = Non-replaceable\n- Meaning: Unique\n\nBut...\n- Pictures can be copy-pasted\n- Code can be copy-pasted\n- Only "ownership" is unique\n\nLike:\n- You buy a "unique" picture\n- But the whole world can see it\n- You only own the "right to own"\n\nIn the DumbFun world:\nNFT = Not For Trading\n\nBecause... why trade air? 🤔`;
+        break;
+      case 'crypto':
+      case 'cryptocurrency':
+        output = `💰 Cryptocurrency Explanation! 💰\n\nWhat is cryptocurrency?\n\nOfficial definition: Digital currency based on cryptography\n\nDumbFun definition: Digital version of playing house\n\nFeatures:\n1. No physical form, only code\n2. Value completely based on faith\n3. Price like a roller coaster\n4. Can become rich overnight, or poor overnight\n\nWhy called "crypto"?\n- Because protected by cryptography\n- But... what is cryptography protecting?\n- Protecting a non-existent "currency"?\n\nIn the DumbFun world:\nCryptocurrency = Digital faith\n\nYou believe it has value, it has value!\nYou don\'t believe, it\'s just a bunch of code!\n\nLike...\n- You believe unicorns exist, unicorns exist\n- You don\'t believe, unicorns don\'t exist\n\nBut... at least easier to trade than unicorns! 🦄`;
+        break;
+      case 'defi':
+      case 'decentralized finance':
+        output = `🏦 DeFi Explanation Time! 🏦\n\nWhat is DeFi?\n\nDecentralized Finance\n\nDumbFun explanation:\n- Banks without banks\n- Finance without regulation\n- Trust without trust\n\nSounds contradictory?\nYes! That\'s the charm of DeFi!\n\nTraditional finance:\n- Banks help you manage money\n- Government regulates banks\n- You trust banks\n\nDeFi:\n- Code helps you manage money\n- No one regulates code\n- You trust code\n\nBut...\n- Code might have bugs\n- Code might be hacked\n- Code might run away\n\nLike:\n- You give money to banks, banks might go bankrupt\n- You give money to code, code might bug\n\nChoice paralysis! 😵‍💫\n\nIn the DumbFun world:\nDeFi = Definitely Foolish\n\nBut... at least it\'s fun! 😂`;
+        break;
+      case 'web3':
+        output = `🌐 Web3 Explanation Time! 🌐\n\nWhat is Web3?\n\nOfficial definition: Next generation internet\n\nDumbFun definition: Make the internet more complicated\n\nWeb1: Read-only (like reading newspapers)\nWeb2: Read-write (like social media)\nWeb3: Read-write-own (like... I don\'t know what)\n\nWeb3 features:\n1. Decentralized (no center, but has centralized exchanges)\n2. Users own data (but data is public on blockchain)\n3. Privacy protection (but all transactions are public)\n4. Censorship resistant (but might be 51% attacked)\n\nSounds contradictory?\nYes! That\'s Web3!\n\nLike:\n- You say you want privacy, but make everything public\n- You say you want decentralization, but rely on centralized services\n- You say you want censorship resistance, but might be attacked\n\nIn the DumbFun world:\nWeb3 = Web Confused\n\nBut... at least it sounds cool! 😎`;
+        break;
       case 'quit':
       case 'exit':
-        output = `你想退出？
-但是...
-你无法退出！
-这是一个网页！
-哈哈哈哈！
-按 Ctrl+C 试试看！`;
+        output = `You want to quit?\n\nBut...\nYou can\'t quit!\nThis is a webpage!\nHahaha!\n\nIn the DumbFun world:\n- No real exit\n- No real start\n- Only eternal loops\n\nJust like life!\n\nTry Ctrl+C!\n(Although it might not work, but trying never hurts!)`;
         break;
-
       case 'sudo':
-        output = `请输入密码：
-********
-密码错误！
-你永远无法获得超级用户权限！
-哈哈哈哈！`;
+        output = `Please enter password:\n********\nPassword incorrect!\n\nYou will never get superuser privileges!\nHahaha!\n\nIn the DumbFun world:\n- No superusers\n- No privileges\n- Only equal dumb people!\n\nThis is our democracy!\n\nBut... at least we\'re happy! 😄`;
         break;
-
-      case 'rm -rf':
-      case 'rm -rf /':
-        output = `你想删除所有文件？
-但是...
-这些都是假文件！
-删除失败！
-哈哈哈哈！
-系统保护机制启动！`;
+      case 'dumb':
+      case 'what is dumb':
+        output = `🤪 DumbFun Philosophy Class! 🤪\n\nWhat is Dumb?\n\nDumb = Dumb, stupid, mute\n\nBut in the DumbFun world:\nDumb = A way of life\n\nDumb philosophy:\n1. Acknowledge your ignorance\n2. Enjoy simple happiness\n3. Don\'t pretend to be smart\n4. Keep curiosity\n5. Laugh at life\n\nWhy choose Dumb?\n- Smart people think too much\n- Dumb people are always happy\n- Simple is beautiful\n- Complex is tiring\n\nIn the AI era:\n- AI becomes smarter\n- Humans become dumber\n- But... humans become happier!\n\nConclusion:\nDumb is not a defect, it\'s a feature!\nDumb is not a problem, it\'s a solution!\nDumb is not wrong, it\'s right!\n\nStay Dumb, Stay Fun! 😄`;
         break;
-
-      case 'ping':
-      case 'ping google.com':
-        output = `
-PING google.com (142.250.190.78): 56 data bytes
-64 bytes from 142.250.190.78: icmp_seq=1 time=15.234 ms
-64 bytes from 142.250.190.78: icmp_seq=2 time=14.567 ms
-64 bytes from 142.250.190.78: icmp_seq=3 time=16.789 ms
---- google.com ping statistics ---
-3 packets transmitted, 3 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 14.567/15.530/16.789/0.891 ms`;
-        break;
-
-      case 'top':
-        output = `top - 12:34:56 up 2:34, 1 user, load average: 0.15, 0.12, 0.08
-Tasks: 45 total, 1 running, 44 sleeping, 0 stopped, 0 zombie
-%Cpu(s): 2.3 us, 1.2 sy, 0.0 ni, 96.5 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st
-MiB Mem : 8192.0 total, 2048.0 free, 3072.0 used, 3072.0 buff/cache
-MiB Swap: 0.0 total, 0.0 free, 0.0 used. 4096.0 avail Mem
-
-  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
- 1234 ${currentUser}  20   0  1234567  123456  12345 S   2.3   1.5   0:12.34 dumbfun-terminal
- 5678 ${currentUser}  20   0   987654   98765   9876 S   1.2   1.2   0:05.67 matrix-rain
- 9012 ${currentUser}  20   0   654321   65432   6543 S   0.8   0.8   0:03.45 pixel-art`;
-        break;
-
-      case 'ps':
-      case 'ps aux':
-        output = `USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-${currentUser}     1234  2.3  1.5 1234567 123456 ?        S    10:00   0:12 dumbfun-terminal
-${currentUser}     5678  1.2  1.2  987654  98765 ?        S    10:01   0:05 matrix-rain
-${currentUser}     9012  0.8  0.8  654321  65432 ?        S    10:02   0:03 pixel-art
-${currentUser}     3456  0.5  0.5  432109  43210 ?        S    10:03   0:01 glitch-effect`;
-        break;
-
-      case 'kill':
-      case 'kill 1234':
-        output = `kill: cannot kill process 1234: Operation not permitted
-这是一个假进程，你无法终止它！`;
-        break;
-
-      case 'chmod':
-      case 'chmod 777':
-      case 'chmod 777 fake_file.txt':
-        output = `chmod: changing permissions of 'fake_file.txt': Operation not permitted
-这是一个假文件，你无法修改权限！`;
-        break;
-
-      case 'tar':
-      case 'tar -czf':
-      case 'tar -czf backup.tar.gz':
-        output = `tar: Cannot stat: No such file or directory
-tar: Error exit delayed from previous errors.
-这些假文件无法压缩！`;
-        break;
-
-      case 'reboot':
-        output = `reboot: Need to be root
-你需要超级用户权限来重启系统！
-但是...这是一个网页！`;
-        break;
-
-      case 'shutdown':
-        output = `shutdown: Need to be root
-你需要超级用户权限来关机！
-但是...这是一个网页！`;
-        break;
-
-      case 'vim':
-      case 'nano':
-      case 'emacs':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-我们只支持简单的文本查看，不支持复杂的编辑器！`;
-        break;
-
-      case 'git':
-      case 'git status':
-      case 'git commit':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有Git，只有假文件！`;
-        break;
-
-      case 'docker':
-      case 'docker ps':
-      case 'docker run':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有Docker，只有假进程！`;
-        break;
-
-      case 'npm':
-      case 'npm install':
-      case 'npm start':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有Node.js，只有假系统！`;
-        break;
-
-      case 'python':
-      case 'python3':
-      case 'python script.py':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有Python，只有假终端！`;
-        break;
-
-      case 'node':
-      case 'node app.js':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有Node.js，只有假环境！`;
-        break;
-
-      case 'ssh':
-      case 'ssh user@host':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有网络连接，只有假终端！`;
-        break;
-
-      case 'wget':
-      case 'curl':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有网络功能，只有假文件！`;
-        break;
-
-      case 'apt':
-      case 'apt install':
-      case 'yum':
-      case 'yum install':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有包管理器，只有假系统！`;
-        break;
-
-      case 'systemctl':
-      case 'service':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有系统服务，只有假进程！`;
-        break;
-
-      case 'crontab':
-      case 'at':
-        output = `Sorry，这是DumbFun，无法解析你的命令。
-这里没有定时任务，只有假时间！`;
-        break;
-
       default:
         if (command.startsWith('echo ')) {
           output = command.substring(5);
         } else if (command.startsWith('cd ')) {
-          output = `bash: cd: ${command.substring(3)}: No such file or directory`;
+          output = `bash: cd: ${command.substring(3)}: No such file or directory\n\nIn the DumbFun world, even directories are fake!`;
         } else if (command.startsWith('cat ')) {
-          output = `cat: ${command.substring(4)}: No such file or directory`;
+          output = `cat: ${command.substring(4)}: No such file or directory\n\nIn the DumbFun world, even files are fake!`;
         } else if (command.startsWith('sudo ')) {
-          output = '权限被拒绝！\n你无法执行此命令！\n哈哈哈哈！';
+          output = 'Permission denied!\nYou cannot execute this command!\nHahaha!\n\nIn the DumbFun world, we are all equal dumb people!';
         } else if (command.includes('rm')) {
-          output = '删除命令被阻止！\n这是为了保护你的假文件！';
-        } else if (command.startsWith('ping ')) {
-          output = `ping: cannot resolve ${command.substring(5)}: Unknown host`;
-        } else if (command.startsWith('kill ')) {
-          output = `kill: cannot kill process ${command.substring(5)}: No such process`;
-        } else if (command.startsWith('chmod ')) {
-          output = `chmod: changing permissions of '${command.substring(6)}': Operation not permitted`;
-        } else if (command.startsWith('tar ')) {
-          output = 'tar: Cannot stat: No such file or directory';
+          output = 'Delete command blocked!\nThis is to protect your fake files!\n\nIn the DumbFun world, even deletion is fake!';
+        } else if (command.includes('git')) {
+          output = `Git? In the DumbFun world?\n\nHahaha!\n\nThere\'s no version control here, only eternal chaos!\n\nJust like our lives!\n\nBut... at least we\'re happy! 😂`;
+        } else if (command.includes('docker')) {
+          output = `Docker? Containerization?\n\nIn the DumbFun world, we don\'t need containers!\n\nWe are containers ourselves!\n\nFilled with happiness and stupidity!\n\nHahaha! 🐳`;
+        } else if (command.includes('npm') || command.includes('node')) {
+          output = `Node.js? npm?\n\nIn the DumbFun world, we don\'t need package managers!\n\nWe manage happiness!\n\nNot code packages!\n\nHahaha! 📦`;
+        } else if (command.includes('python')) {
+          output = `Python?\n\nIn the DumbFun world, we don\'t need programming languages!\n\nWe have our own language!\n\nCalled: Happiness Language!\n\nHahaha! 🐍`;
+        } else if (command.includes('vim') || command.includes('nano') || command.includes('emacs')) {
+          output = `Editor?\n\nIn the DumbFun world, we don\'t need editors!\n\nWe edit directly with our hearts!\n\nEdit with happiness!\n\nHahaha! ✏️`;
+        } else if (command.includes('ssh') || command.includes('telnet')) {
+          output = `Remote connection?\n\nIn the DumbFun world, we don\'t need remote connections!\n\nWe connect directly with our hearts!\n\nConnect with happiness!\n\nHahaha! 🌐`;
+        } else if (command.includes('ping') || command.includes('curl') || command.includes('wget')) {
+          output = `Network commands?\n\nIn the DumbFun world, we don\'t need networks!\n\nWe have happiness networks!\n\nConnecting all dumb people!\n\nHahaha! 📡`;
+        } else if (command.includes('apt') || command.includes('yum') || command.includes('brew')) {
+          output = `Package manager?\n\nIn the DumbFun world, we don\'t need package managers!\n\nWe manage happiness packages!\n\nContains:\n- Happiness\n- Stupidity\n- Humor\n- Love\n\nHahaha! 📦`;
+        } else if (command.includes('systemctl') || command.includes('service')) {
+          output = `System services?\n\nIn the DumbFun world, we don\'t need system services!\n\nWe provide happiness services!\n\n24/7 happiness service!\n\nHahaha! 🔧`;
+        } else if (command.includes('crontab') || command.includes('at')) {
+          output = `Scheduled tasks?\n\nIn the DumbFun world, we don\'t need scheduled tasks!\n\nWe are happy all the time!\n\nNo scheduling needed!\n\nHahaha! ⏰`;
+        } else if (command.includes('top') || command.includes('ps') || command.includes('htop')) {
+          output = `Process monitoring?\n\nIn the DumbFun world, we don\'t need to monitor processes!\n\nWe monitor happiness processes!\n\nCurrent happiness index: 100%\n\nHahaha! 📊`;
+        } else if (command.includes('kill') || command.includes('pkill')) {
+          output = `Kill processes?\n\nIn the DumbFun world, we don\'t need to kill processes!\n\nWe only kill sadness!\n\nKeep happiness!\n\nHahaha! 💀`;
+        } else if (command.includes('chmod') || command.includes('chown')) {
+          output = `Permission management?\n\nIn the DumbFun world, we don\'t need permissions!\n\nWe are all equal dumb people!\n\nNo permissions, only happiness!\n\nHahaha! 🔐`;
+        } else if (command.includes('tar') || command.includes('zip') || command.includes('gzip')) {
+          output = `Compress files?\n\nIn the DumbFun world, we don\'t need compression!\n\nWe compress sadness!\n\nKeep happiness uncompressed!\n\nHahaha! 📦`;
+        } else if (command.includes('reboot') || command.includes('shutdown')) {
+          output = `Reboot? Shutdown?\n\nIn the DumbFun world, we don\'t need to reboot!\n\nWe are always online!\n\nAlways happy!\n\nHahaha! 🔄`;
         } else if (command) {
-          output = `Sorry，这是DumbFun，无法解析你的命令 "${command}"。
-输入 "help" 查看可用命令。`;
+          const dumbResponses = [
+            `Sorry, this is DumbFun, cannot parse your command "${command}".\n\nIn the DumbFun world, we only understand happiness!\n\nTry typing: help, ai, blockchain, nft, crypto, defi, web3, dumb\n\nOr try: matrix, pixel, glitch, dance, fortune\n\nRemember: Stay dumb, stay happy! 😄`,
+            `Command "${command}" is too complex!\n\nIn the DumbFun world, we like simple things!\n\nJust like we like happiness!\n\nTry simple commands: help, ai, blockchain\n\nOr entertainment commands: dance, fortune\n\nSimple is beautiful! 🤪`,
+            `Wow! You typed "${command}"!\n\nThis sounds smart!\n\nBut in the DumbFun world, we don\'t need smart!\n\nWe only need happiness!\n\nTry: ai, blockchain, nft\n\nOr: dance, fortune, glitch\n\nSmart is a burden, happiness is freedom! 😂`,
+            `Command "${command}" does not exist!\n\nJust like in the DumbFun world, sadness doesn\'t exist!\n\nWe only exist in happiness!\n\nTry these existing commands:\n- help (help)\n- ai (AI satire)\n- blockchain (blockchain explanation)\n- nft (NFT satire)\n- dance (dance)\n- fortune (quotes)\n\nExistence is happiness! 🎉`
+          ];
+          output = dumbResponses[Math.floor(Math.random() * dumbResponses.length)];
         }
     }
-
-    // 添加输出到命令历史
-    setCommands(prev => [...prev, {
-      id: Date.now() + 1,
-      input: '',
-      output,
-      timestamp: new Date()
-    }]);
-
-    // 滚动到底部
-    setTimeout(() => {
-      if (terminalRef.current) {
-        terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    setCommands(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        input: `[${new Date().toLocaleTimeString()}] ${currentUser}@${currentHost}:${currentPath}$ ${input}`,
+        output,
+        timestamp: new Date()
       }
-    }, 100);
+    ]);
   };
 
+  // 输入框键盘事件
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && currentInput.trim()) {
       executeCommand(currentInput);
@@ -520,6 +470,55 @@ tar: Error exit delayed from previous errors.
     setCursorPosition(e.target.value.length);
   };
 
+  // 渲染开机动画界面
+  if (currentPhase === 'boot') {
+    return (
+      <div className={`App boot-animation-screen ${crashEffect ? 'crash-effect' : ''}`}>
+        {/* Linux/DUMBFUN文字显示 */}
+        {!crashEffect && (
+          <div className="linux-text">
+            {linuxText}
+            <span className="cursor-blink">|</span>
+          </div>
+        )}
+        
+        {/* 崩溃效果 */}
+        {crashEffect && (
+          <div className="crash-overlay">
+            <div className="crash-text">MEMORY ERROR</div>
+            <div className="crash-text">SYSTEM CRASH</div>
+            <div className="crash-text">REBOOTING...</div>
+          </div>
+        )}
+        
+        {/* 加载进度条 */}
+        {animationPhase === 'loading' && (
+          <div className="loading-animation">
+            <div className="loading-text">DumbFun</div>
+            <div className="loading-text">Loading</div>
+            <div className="loading-bar">
+              <div 
+                className="loading-bar-fill" 
+                style={{ width: `${loadingBarProgress}%` }}
+              ></div>
+            </div>
+            <div className="loading-percentage">{Math.round(loadingBarProgress)}%</div>
+          </div>
+        )}
+        
+        {/* 指令式交互 */}
+        {commandVisible && (
+          <div className="command-animation">
+            <div className="command-text">{commandInput}<span className="cursor-blink">|</span></div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+
+
+  // 渲染终端界面
   return (
     <div className={`App ${glitchEffect ? 'glitch' : ''}`}>
       {/* 矩阵雨背景 */}
@@ -563,22 +562,24 @@ tar: Error exit delayed from previous errors.
 
         <div className="terminal-body" ref={terminalRef}>
           <div className="terminal-content">
+            {/* 说明区域 */}
+            {showInstructions && (
+              <div className="instructions">
+                <div className="instructions-title">=== DUMBFUN TERMINAL GUIDE ===</div>
+                <div>This is the DUMBFUN terminal interface. You can input any Linux command, and I will respond according to DUMBFUN rules.</div>
+                <div>Normal commands will work normally, commands beyond my capabilities will make me become Dumb.</div>
+                <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
+                <button className="close-instructions" onClick={() => setShowInstructions(false)}>Close Guide</button>
+              </div>
+            )}
+            {/* 历史命令和输出 */}
             {commands.map((cmd) => (
               <div key={cmd.id} className="command-line">
                 {cmd.input && <div className="command-input">{cmd.input}</div>}
                 {cmd.output && <pre className="command-output">{cmd.output}</pre>}
               </div>
             ))}
-            
-            {isTyping && (
-              <div className="typing-indicator">
-                <span className="typing-dots">正在输入</span>
-                <span className="dot">.</span>
-                <span className="dot">.</span>
-                <span className="dot">.</span>
-              </div>
-            )}
-
+            {/* 输入区 */}
             <div className="current-line">
               <span className="prompt">[{new Date().toLocaleTimeString()}] {currentUser}@{currentHost}:{currentPath}$ </span>
               <div className="input-container">
@@ -587,9 +588,8 @@ tar: Error exit delayed from previous errors.
                   type="text"
                   value={currentInput}
                   onChange={handleInputChange}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyPress}
                   className="command-input-field"
-                  disabled={!terminalReady || isTyping}
                   autoFocus
                 />
                 <span 

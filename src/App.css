@@ -81,6 +81,254 @@ body {
   line-height: 1;
 }
 
+/* 开机动画界面样式 */
+.boot-animation-screen {
+  background: #000;
+  color: #00ff00;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Linux/DUMBFUN文字显示 */
+.linux-text {
+  font-size: 36px;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 0 0 20px #00ff00;
+  margin-bottom: 50px;
+  animation: linuxGlow 2s ease-in-out infinite alternate;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+  line-height: 1.2;
+}
+
+@keyframes linuxGlow {
+  0% { text-shadow: 0 0 20px #00ff00; }
+  100% { text-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
+}
+
+/* 崩溃效果 */
+.crash-effect {
+  animation: crashShake 0.1s ease-in-out infinite;
+}
+
+@keyframes crashShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.crash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.crash-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff0000;
+  text-shadow: 0 0 20px #ff0000;
+  margin: 15px 0;
+  animation: crashText 0.5s ease-in-out infinite alternate;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+  line-height: 1.5;
+}
+
+@keyframes crashText {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* 加载动画 */
+.loading-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 5;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #00ff00;
+  margin-bottom: 15px;
+  animation: loadingPulse 1s ease-in-out infinite alternate;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+  line-height: 1.5;
+}
+
+@keyframes loadingPulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.loading-bar {
+  width: 400px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #00ff00;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+  image-rendering: pixelated;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff00, #00aa00, #00ff00);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 20px #00ff00;
+  animation: loadingGlow 1s ease-in-out infinite alternate;
+  image-rendering: pixelated;
+}
+
+@keyframes loadingGlow {
+  0% { box-shadow: 0 0 20px #00ff00; }
+  100% { box-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
+}
+
+.loading-percentage {
+  font-size: 14px;
+  color: #00ff00;
+  font-weight: bold;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  letter-spacing: 1px;
+  image-rendering: pixelated;
+  line-height: 1.5;
+}
+
+/* 指令式交互 */
+.command-animation {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.command-text {
+  font-size: 16px;
+  color: #00ff00;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  image-rendering: pixelated;
+  line-height: 1.5;
+}
+
+/* 光标闪烁效果 */
+.cursor-blink {
+  animation: cursorBlink 1s ease-in-out infinite;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 像素风格增强 */
+.boot-animation-screen * {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 说明区域样式 */
+.instructions {
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  position: relative;
+}
+
+.instructions-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #00ff00;
+}
+
+.instructions div {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.instructions-cmd {
+  background: rgba(0, 255, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #00ff00;
+}
+
+.close-instructions {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  padding: 5px 15px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.close-instructions:hover {
+  background: rgba(255, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.close-instructions:active {
+  transform: scale(0.95);
+}
+
 /* 终端容器 */
 .terminal-container {
   position: absolute;

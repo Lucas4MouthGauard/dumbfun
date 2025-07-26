@@ -1,194 +1,194 @@
-# DUMBFUN 🤪 - 复古命令行风格的笨蛋终端
+# DUMBFUN 🤪 - Retro Command Line Style Dumb Terminal
 
-一个完全重新设计的复古命令行风格React网页应用，结合像素艺术动画和矩阵雨效果，将"笨蛋"交互方式提升到新的高度！
+A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "dumb" interactions to new heights!
 
-## 🎯 项目特色
+## 🎯 Project Features
 
-### 复古命令行界面设计
+### Retro Command Line Interface Design
 
-1. **🖥️ 经典终端外观**
-   - 黑色背景配绿色文字，经典黑客风格
-   - 模拟真实终端的窗口边框和按钮
-   - 扫描线效果和CRT显示器风格
+1. **🖥️ Classic Terminal Appearance**
+   - Black background with green text, classic hacker style
+   - Simulated real terminal window borders and buttons
+   - Scan line effects and CRT monitor style
 
-2. **⌨️ 真实命令行交互**
-   - 支持输入命令并按回车执行
-   - 命令历史记录和滚动
-   - 打字机效果的命令输出
-   - 闪烁的光标效果
+2. **⌨️ Real Command Line Interaction**
+   - Support for command input and execution with Enter
+   - Command history recording and scrolling
+   - Typewriter effect command output
+   - Blinking cursor effect
 
-3. **🌧️ 矩阵雨背景**
-   - 动态的日文字符雨效果
-   - 随机位置和速度的字符下落
-   - 营造黑客帝国氛围
+3. **🌧️ Matrix Rain Background**
+   - Dynamic Japanese character rain effect
+   - Random position and speed character falling
+   - Creates Matrix atmosphere
 
-4. **🎨 像素艺术装饰**
-   - 随机生成的ASCII像素图案
-   - 动态出现和消失的像素艺术
-   - 复古游戏风格的视觉效果
+4. **🎨 Pixel Art Decorations**
+   - Randomly generated ASCII pixel patterns
+   - Dynamic appearing and disappearing pixel art
+   - Retro gaming style visual effects
 
-### 丰富的"笨蛋"命令系统
+### Rich "Dumb" Command System
 
-#### 基础命令
-- **`help`** - 显示所有可用命令
-- **`clear`** - 清空终端历史
-- **`matrix`** - 启动矩阵模式（触发故障效果）
-- **`pixel`** - 显示随机像素艺术
-- **`glitch`** - 触发屏幕故障效果
+#### Basic Commands
+- **`help`** - Display all available commands
+- **`clear`** - Clear terminal history
+- **`matrix`** - Start matrix mode (triggers glitch effects)
+- **`pixel`** - Display random pixel art
+- **`glitch`** - Trigger screen glitch effects
 
-#### 娱乐命令
-- **`dance`** - 让终端"跳舞"（显示ASCII艺术）
-- **`rainbow`** - 彩虹模式（文字版）
-- **`beep`** - 发出"哔哔"声（文字版）
-- **`random`** - 随机响应命令
+#### Entertainment Commands
+- **`dance`** - Make terminal "dance" (display ASCII art)
+- **`rainbow`** - Rainbow mode (text version)
+- **`beep`** - Make "beep" sound (text version)
+- **`random`** - Random response commands
 
-#### 假系统命令
-- **`ls`** - 列出"假文件"
-- **`cat`** - 显示"假文件"内容
-- **`sudo`** - 超级用户模式（永远失败）
-- **`rm -rf`** - 删除命令（被阻止）
-- **`ping`** - 网络测试（假数据）
-- **`quit`** - 退出（但无法真正退出）
+#### Fake System Commands
+- **`ls`** - List "fake files"
+- **`cat`** - Display "fake file" content
+- **`sudo`** - Superuser mode (always fails)
+- **`rm -rf`** - Delete command (blocked)
+- **`ping`** - Network test (fake data)
+- **`quit`** - Exit (but cannot really exit)
 
-### 视觉特效
+### Visual Effects
 
-1. **🔧 故障效果**
-   - 屏幕抖动和偏移
-   - 红色故障线条
-   - 随机闪烁效果
+1. **🔧 Glitch Effects**
+   - Screen shaking and offset
+   - Red glitch lines
+   - Random flashing effects
 
-2. **📺 CRT显示器效果**
-   - 扫描线动画
-   - 屏幕闪烁
-   - 径向渐变阴影
+2. **📺 CRT Monitor Effects**
+   - Scan line animations
+   - Screen flickering
+   - Radial gradient shadows
 
-3. **🎭 像素化效果**
-   - 像素艺术渲染
-   - 复古游戏风格
-   - ASCII字符艺术
+3. **🎭 Pixelated Effects**
+   - Pixel art rendering
+   - Retro gaming style
+   - ASCII character art
 
-## 🚀 技术栈
+## 🚀 Technology Stack
 
-- **React 18** - 现代化的React框架
-- **TypeScript** - 类型安全的JavaScript
-- **Framer Motion** - 流畅的动画库
-- **CSS3** - 高级CSS动画和效果
-- **ASCII Art** - 字符艺术
+- **React 18** - Modern React framework
+- **TypeScript** - Type-safe JavaScript
+- **Framer Motion** - Smooth animation library
+- **CSS3** - Advanced CSS animations and effects
+- **ASCII Art** - Character art
 
-## 📦 安装和运行
+## 📦 Installation and Running
 
-### 前提条件
-- Node.js (版本 14 或更高)
-- npm 或 yarn
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn
 
-### 安装步骤
+### Installation Steps
 
-1. **克隆项目**
+1. **Clone the project**
    ```bash
    git clone <repository-url>
    cd dumbfun
    ```
 
-2. **安装依赖**
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-3. **启动开发服务器**
+3. **Start development server**
    ```bash
    npm start
    ```
 
-4. **打开浏览器**
-   访问 [http://localhost:3000](http://localhost:3000)
+4. **Open browser**
+   Visit [http://localhost:3000](http://localhost:3000)
 
-### 构建生产版本
+### Build production version
 ```bash
 npm run build
 ```
 
-## 🎨 设计理念
+## 🎨 Design Philosophy
 
-这个项目采用了"复古未来主义"的设计理念：
+This project adopts a "retro-futuristic" design philosophy:
 
-- **怀旧感** - 致敬80-90年代的计算机界面
-- **未来感** - 结合现代动画技术
-- **幽默感** - 通过"假命令"和"笨蛋"响应制造笑点
-- **沉浸感** - 完全模拟真实的终端体验
+- **Nostalgia** - Paying tribute to 80s-90s computer interfaces
+- **Futuristic** - Combining modern animation technology
+- **Humor** - Creating laughs through "fake commands" and "dumb" responses
+- **Immersion** - Completely simulating real terminal experience
 
-## 🎭 交互元素详解
+## 🎭 Interactive Elements Details
 
-### 终端界面
-- 使用CSS Grid和Flexbox布局
-- 模拟真实终端的窗口管理
-- 响应式设计适配不同屏幕
+### Terminal Interface
+- Using CSS Grid and Flexbox layout
+- Simulating real terminal window management
+- Responsive design adapting to different screens
 
-### 命令系统
-- 使用switch语句处理不同命令
-- 异步命令执行模拟真实延迟
-- 命令历史状态管理
+### Command System
+- Using switch statements to handle different commands
+- Asynchronous command execution simulating real delays
+- Command history state management
 
-### 动画效果
-- 矩阵雨使用CSS动画
-- 故障效果使用Framer Motion
-- 像素艺术使用React状态管理
+### Animation Effects
+- Matrix rain using CSS animations
+- Glitch effects using Framer Motion
+- Pixel art using React state management
 
-## 🎪 视觉效果详解
+## 🎪 Visual Effects Details
 
-### CSS动画
-- `matrixFall` - 矩阵字符下落
-- `glitchEffect` - 故障抖动效果
-- `scanLine` - 扫描线动画
-- `flicker` - 屏幕闪烁
-- `typingDot` - 打字指示器
+### CSS Animations
+- `matrixFall` - Matrix character falling
+- `glitchEffect` - Glitch shaking effect
+- `scanLine` - Scan line animation
+- `flicker` - Screen flickering
+- `typingDot` - Typing indicator
 
-### 特殊效果
-- 径向渐变阴影模拟CRT显示器
-- 重复线性渐变创建扫描线
-- 文本阴影增强发光效果
-- 像素化渲染保持复古风格
+### Special Effects
+- Radial gradient shadows simulating CRT monitors
+- Repeated linear gradients creating scan lines
+- Text shadows enhancing glow effects
+- Pixelated rendering maintaining retro style
 
-## 📱 响应式设计
+## 📱 Responsive Design
 
-项目完全响应式，支持：
-- 桌面端 (1200px+)
-- 平板端 (768px - 1199px)
-- 移动端 (< 768px)
+The project is fully responsive, supporting:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (< 768px)
 
-## 🎯 可扩展功能
+## 🎯 Extensible Features
 
-- [ ] 添加更多ASCII艺术图案
-- [ ] 实现命令历史导航（上下箭头）
-- [ ] 添加更多"假系统"命令
-- [ ] 实现多用户模式
-- [ ] 添加音效支持
-- [ ] 实现主题切换功能
+- [ ] Add more ASCII art patterns
+- [ ] Implement command history navigation (up/down arrows)
+- [ ] Add more "fake system" commands
+- [ ] Implement multi-user mode
+- [ ] Add sound effects support
+- [ ] Implement theme switching functionality
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交Issue和Pull Request！
+Welcome to submit Issues and Pull Requests!
 
-### 贡献指南
-1. Fork项目
-2. 创建功能分支
-3. 提交更改
-4. 推送到分支
-5. 创建Pull Request
+### Contributing Guidelines
+1. Fork the project
+2. Create a feature branch
+3. Commit changes
+4. Push to the branch
+5. Create a Pull Request
 
-## 📄 许可证
+## 📄 License
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+MIT License - See [LICENSE](LICENSE) file for details
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-感谢所有为这个"笨蛋"终端提供灵感的：
-- 经典黑客电影
-- 复古计算机游戏
-- ASCII艺术创作者
-- 命令行工具开发者
+Thanks to all who provided inspiration for this "dumb" terminal:
+- Classic hacker movies
+- Retro computer games
+- ASCII art creators
+- Command line tool developers
 
 ---
 
-**记住：在数字世界中，最"笨蛋"的交互往往是最有趣的！** 🤪
+**Remember: In the digital world, the "dumbest" interactions are often the most fun!** 🤪
 
 *"Welcome to the Matrix... of Dumbness!"* 🖥️
