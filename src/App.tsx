@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
@@ -26,32 +26,36 @@ const App: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
-  // 像素艺术图案
-  const pixelPatterns = [
+  // 像素艺术图案 - 使用useMemo优化
+  const pixelPatterns = useMemo(() => [
     '█▀▀▀█\n█   █\n█▄▄▄█',
     '▄▄▄▄▄\n ▀▀▀ \n▄▄▄▄▄',
     '█▀▀▀█\n█▀▀▀█\n█▄▄▄█',
     '▀▀▀▀▀\n▄▄▄▄▄\n▀▀▀▀▀'
-  ];
+  ], []);
 
   // 矩阵雨效果字符
   const matrixChars = '｢｣ﾘｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789';
 
+  // 启动消息
+  const startupMessages = [
+    '正在启动 DUMBFUN Linux 终端系统...',
+    '正在加载内核模块...',
+    '系统启动完成！输入 "help" 查看可用命令'
+  ];
+
   // 初始化终端
   useEffect(() => {
     const initTerminal = async () => {
-      await typeText('正在启动 DUMBFUN Linux 终端系统...', 50);
-      await typeText('正在加载内核模块...', 30);
-      await typeText('正在初始化文件系统...', 40);
-      await typeText('正在启动网络服务...', 35);
-      await typeText('正在加载用户环境...', 30);
-      await typeText('系统启动完成！输入 "help" 查看可用命令', 20);
+      for (const message of startupMessages) {
+        await typeText(message, 50);
+      }
       setTerminalReady(true);
       inputRef.current?.focus();
     };
 
     initTerminal();
-  }, []);
+  }, [startupMessages]);
 
   // 矩阵雨效果 - 降低速度
   useEffect(() => {
@@ -60,7 +64,7 @@ const App: React.FC = () => {
         matrixChars[Math.floor(Math.random() * matrixChars.length)]
       );
       setMatrixRain(newRain);
-    }, 200); // 从100ms改为200ms
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);
@@ -70,28 +74,24 @@ const App: React.FC = () => {
     const interval = setInterval(() => {
       setPixelArt(prev => {
         const newArt = [...prev];
-        if (newArt.length > 8) newArt.shift(); // 减少最大数量
+        if (newArt.length > 8) newArt.shift();
         newArt.push(pixelPatterns[Math.floor(Math.random() * pixelPatterns.length)]);
         return newArt;
       });
-    }, 4000); // 从2000ms改为4000ms
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [pixelPatterns]);
 
   const typeText = useCallback(async (text: string, speed: number = 30) => {
     setIsTyping(true);
-    let displayText = '';
-    for (let i = 0; i < text.length; i++) {
-      displayText += text[i];
-      setCommands(prev => [...prev, {
-        id: Date.now() + i,
-        input: '',
-        output: displayText,
-        timestamp: new Date()
-      }]);
-      await new Promise(resolve => setTimeout(resolve, speed));
-    }
+    setCommands(prev => [...prev, {
+      id: Date.now(),
+      input: '',
+      output: text,
+      timestamp: new Date()
+    }]);
+    await new Promise(resolve => setTimeout(resolve, speed));
     setIsTyping(false);
   }, []);
 
@@ -114,52 +114,38 @@ const App: React.FC = () => {
     }]);
 
     // 模拟命令执行延迟
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout(resolve, 200));
 
+    // 常见命令处理
     switch (command) {
       case 'help':
         output = `
 DUMBFUN Linux Terminal v1.0.0
 可用命令列表：
 
-系统命令：
+基础命令：
 - help: 显示此帮助信息
 - clear: 清空终端
 - whoami: 显示当前用户
-- hostname: 显示主机名
 - pwd: 显示当前路径
 - ls: 列出文件
-- cd: 切换目录
-- cat: 显示文件内容
-- echo: 回显文本
 - date: 显示日期时间
-- uptime: 显示系统运行时间
 
 娱乐命令：
 - matrix: 启动矩阵模式
 - pixel: 显示像素艺术
 - glitch: 触发故障效果
 - dance: 让终端跳舞
-- rainbow: 彩虹模式
-- beep: 发出哔哔声
-- random: 随机命令
 - fortune: 显示随机名言
 
-假系统命令：
+其他命令：
+- echo: 回显文本
+- cat: 显示文件内容
+- cd: 切换目录
 - sudo: 超级用户模式（假的）
-- rm: 删除文件（假的）
-- ping: 网络测试（假的）
-- top: 系统监控（假的）
-- ps: 进程列表（假的）
-- kill: 终止进程（假的）
-- chmod: 修改权限（假的）
-- tar: 压缩文件（假的）
+- quit: 退出（假的）
 
-特殊命令：
-- quit: 退出（但不会真的退出）
-- reboot: 重启（假的）
-- shutdown: 关机（假的）
-        `;
+输入任何命令试试看！`;
         break;
 
       case 'clear':
@@ -168,10 +154,6 @@ DUMBFUN Linux Terminal v1.0.0
 
       case 'whoami':
         output = currentUser;
-        break;
-
-      case 'hostname':
-        output = currentHost;
         break;
 
       case 'pwd':
@@ -184,10 +166,8 @@ total 8
 drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 .
 drwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..
 -rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt
--rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 another_fake.txt
-drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory
--rw-r--r--  1 ${currentUser}  staff  789 Dec 25 12:00 README.md
-        `;
+-rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md
+drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory`;
         break;
 
       case 'ls -la':
@@ -196,10 +176,8 @@ total 16
 drwxr-xr-x  4 ${currentUser}  staff  136 Dec 25 12:00 .
 drwxr-xr-x  3 ${currentUser}  staff  102 Dec 25 12:00 ..
 -rw-r--r--  1 ${currentUser}  staff  123 Dec 25 12:00 fake_file.txt
--rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 another_fake.txt
-drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory
--rw-r--r--  1 ${currentUser}  staff  789 Dec 25 12:00 README.md
-        `;
+-rw-r--r--  1 ${currentUser}  staff  456 Dec 25 12:00 README.md
+drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory`;
         break;
 
       case 'cd fake_directory':
@@ -226,6 +204,7 @@ drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory
 最后修改: Dec 25 12:00:00 2024`;
         break;
 
+      case 'cat readme.md':
       case 'cat README.md':
         output = `# DUMBFUN Terminal
 
@@ -243,17 +222,8 @@ drwxr-xr-x  2 ${currentUser}  staff   68 Dec 25 12:00 fake_directory
 DUMBFUN Team`;
         break;
 
-      case 'echo hello world':
-        output = 'hello world';
-        break;
-
       case 'date':
         output = new Date().toString();
-        break;
-
-      case 'uptime':
-        output = `up 2 hours, 34 minutes, 12 seconds
-load average: 0.15, 0.12, 0.08`;
         break;
 
       case 'matrix':
@@ -280,35 +250,6 @@ load average: 0.15, 0.12, 0.08`;
 ┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻`;
         break;
 
-      case 'rainbow':
-        output = `🌈 彩虹模式启动！
-红橙黄绿蓝靛紫
-但这里只有文字...
-不过你可以想象一下！`;
-        break;
-
-      case 'beep':
-        output = `哔哔哔！
-哔！
-哔哔！
-（这只是文字，没有声音）
-但是你可以自己发出声音！`;
-        break;
-
-      case 'random':
-        const randomCommands = [
-          '你输入了随机命令！',
-          '这是一个随机的响应！',
-          '随机性万岁！',
-          '你永远不知道会发生什么！',
-          '随机命令执行中...',
-          '这是一个完全随机的消息！',
-          '随机数生成器工作正常！',
-          '随机性是不可预测的！'
-        ];
-        output = randomCommands[Math.floor(Math.random() * randomCommands.length)];
-        break;
-
       case 'fortune':
         const fortunes = [
           '今天是个好日子！',
@@ -324,6 +265,7 @@ load average: 0.15, 0.12, 0.08`;
         break;
 
       case 'quit':
+      case 'exit':
         output = `你想退出？
 但是...
 你无法退出！
@@ -341,6 +283,7 @@ load average: 0.15, 0.12, 0.08`;
         break;
 
       case 'rm -rf':
+      case 'rm -rf /':
         output = `你想删除所有文件？
 但是...
 这些都是假文件！
@@ -349,6 +292,7 @@ load average: 0.15, 0.12, 0.08`;
 系统保护机制启动！`;
         break;
 
+      case 'ping':
       case 'ping google.com':
         output = `
 PING google.com (142.250.190.78): 56 data bytes
@@ -373,6 +317,7 @@ MiB Swap: 0.0 total, 0.0 free, 0.0 used. 4096.0 avail Mem
  9012 ${currentUser}  20   0   654321   65432   6543 S   0.8   0.8   0:03.45 pixel-art`;
         break;
 
+      case 'ps':
       case 'ps aux':
         output = `USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 ${currentUser}     1234  2.3  1.5 1234567 123456 ?        S    10:00   0:12 dumbfun-terminal
@@ -381,17 +326,22 @@ ${currentUser}     9012  0.8  0.8  654321  65432 ?        S    10:02   0:03 pixe
 ${currentUser}     3456  0.5  0.5  432109  43210 ?        S    10:03   0:01 glitch-effect`;
         break;
 
+      case 'kill':
       case 'kill 1234':
         output = `kill: cannot kill process 1234: Operation not permitted
 这是一个假进程，你无法终止它！`;
         break;
 
+      case 'chmod':
+      case 'chmod 777':
       case 'chmod 777 fake_file.txt':
         output = `chmod: changing permissions of 'fake_file.txt': Operation not permitted
 这是一个假文件，你无法修改权限！`;
         break;
 
-      case 'tar -czf backup.tar.gz *':
+      case 'tar':
+      case 'tar -czf':
+      case 'tar -czf backup.tar.gz':
         output = `tar: Cannot stat: No such file or directory
 tar: Error exit delayed from previous errors.
 这些假文件无法压缩！`;
@@ -407,6 +357,79 @@ tar: Error exit delayed from previous errors.
         output = `shutdown: Need to be root
 你需要超级用户权限来关机！
 但是...这是一个网页！`;
+        break;
+
+      case 'vim':
+      case 'nano':
+      case 'emacs':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+我们只支持简单的文本查看，不支持复杂的编辑器！`;
+        break;
+
+      case 'git':
+      case 'git status':
+      case 'git commit':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有Git，只有假文件！`;
+        break;
+
+      case 'docker':
+      case 'docker ps':
+      case 'docker run':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有Docker，只有假进程！`;
+        break;
+
+      case 'npm':
+      case 'npm install':
+      case 'npm start':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有Node.js，只有假系统！`;
+        break;
+
+      case 'python':
+      case 'python3':
+      case 'python script.py':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有Python，只有假终端！`;
+        break;
+
+      case 'node':
+      case 'node app.js':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有Node.js，只有假环境！`;
+        break;
+
+      case 'ssh':
+      case 'ssh user@host':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有网络连接，只有假终端！`;
+        break;
+
+      case 'wget':
+      case 'curl':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有网络功能，只有假文件！`;
+        break;
+
+      case 'apt':
+      case 'apt install':
+      case 'yum':
+      case 'yum install':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有包管理器，只有假系统！`;
+        break;
+
+      case 'systemctl':
+      case 'service':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有系统服务，只有假进程！`;
+        break;
+
+      case 'crontab':
+      case 'at':
+        output = `Sorry，这是DumbFun，无法解析你的命令。
+这里没有定时任务，只有假时间！`;
         break;
 
       default:
@@ -429,7 +452,8 @@ tar: Error exit delayed from previous errors.
         } else if (command.startsWith('tar ')) {
           output = 'tar: Cannot stat: No such file or directory';
         } else if (command) {
-          output = `bash: ${command}: command not found\n输入 "help" 查看可用命令`;
+          output = `Sorry，这是DumbFun，无法解析你的命令 "${command}"。
+输入 "help" 查看可用命令。`;
         }
     }
 
