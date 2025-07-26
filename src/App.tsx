@@ -23,6 +23,7 @@ const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState('~');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [showInstructions, setShowInstructions] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -50,6 +51,15 @@ const App: React.FC = () => {
       for (const message of startupMessages) {
         await typeText(message, 50);
       }
+      
+      // 添加说明文字
+      await typeText('', 100);
+      await typeText('=== DUMBFUN 终端说明 ===', 30);
+      await typeText('这是一个模拟的终端界面。你可以输入任何Linux命令，我会根据DUMBFUN的规则给出相应的响应。', 30);
+      await typeText('简单的基础命令会正常工作，复杂的开发工具命令会被友好地拒绝。', 30);
+      await typeText('输入 "help" 查看可用命令，或直接开始输入命令！', 30);
+      await typeText('', 100);
+      
       setTerminalReady(true);
       inputRef.current?.focus();
     };
