@@ -3,14 +3,14 @@
   "name": "DUMBFUN Terminal",
   "icons": [
     {
-      "src": "favicon.svg",
-      "type": "image/svg+xml",
+      "src": "images/aidumb.JPG",
+      "type": "image/jpeg",
       "sizes": "any"
     },
     {
-      "src": "favicon.ico",
+      "src": "images/aidumb.JPG",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/jpeg"
     }
   ],
   "start_url": ".",
