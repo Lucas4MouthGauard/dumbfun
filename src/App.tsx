@@ -247,7 +247,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nDUMBFUN Linux Terminal v1.0.0 - The Dumbest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme and other fun commands!`;
+        output = `\nDUMBFUN Linux Terminal v1.0.0 - The Dumbest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge and other fun commands!`;
         break;
       case 'clear':
         setCommands([]);
@@ -314,6 +314,10 @@ const App: React.FC = () => {
       case 'x':
       case 'twitter':
         output = 'X@https://x.com/AIDumb_Fun';
+        break;
+      case '$vinedoge':
+      case 'vinedoge':
+        output = 'https://letsbonk.fun/token/9BfoV2c2GXVg9qPibxa2k1Q6owL3vgJm8uBBxA7ebonk';
         break;
       case 'fortune':
         const fortunes = [
