@@ -309,7 +309,7 @@ const App: React.FC = () => {
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the DumbFun world, even terminals can dance! 🎵`;
         break;
       case 'ca':
-        output = '000000000000000000000';
+        output = '@https://letsbonk.fun/token/6EBbKrxgGFFjvmCrJCdtYWTki7k1Ai7mAQWx9mV6bonk';
         break;
       case 'x':
       case 'twitter':
