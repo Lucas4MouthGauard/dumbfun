@@ -1,6 +1,6 @@
-# DUMBFUN 🤪 - Retro Command Line Style Dumb Terminal
+# Brain.exe 🤪 - Retro Command Line Style Smart Terminal
 
-A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "dumb" interactions to new heights!
+A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 
 ## 🎯 Project Features
 
@@ -27,7 +27,7 @@ A completely redesigned retro command line style React web application, combinin
    - Dynamic appearing and disappearing pixel art
    - Retro gaming style visual effects
 
-### Rich "Dumb" Command System
+### Rich "Smart" Command System
 
 #### Basic Commands
 - **`help`** - Display all available commands
@@ -86,7 +86,7 @@ A completely redesigned retro command line style React web application, combinin
 1. **Clone the project**
    ```bash
    git clone <repository-url>
-   cd dumbfun
+   cd brain.exe
    ```
 
 2. **Install dependencies**
@@ -113,7 +113,7 @@ This project adopts a "retro-futuristic" design philosophy:
 
 - **Nostalgia** - Paying tribute to 80s-90s computer interfaces
 - **Futuristic** - Combining modern animation technology
-- **Humor** - Creating laughs through "fake commands" and "dumb" responses
+- **Humor** - Creating laughs through "fake commands" and "smart" responses
 - **Immersion** - Completely simulating real terminal experience
 
 ## 🎭 Interactive Elements Details
@@ -181,7 +181,7 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ## 🙏 Acknowledgments
 
-Thanks to all who provided inspiration for this "dumb" terminal:
+Thanks to all who provided inspiration for this "smart" terminal:
 - Classic hacker movies
 - Retro computer games
 - ASCII art creators
@@ -189,6 +189,6 @@ Thanks to all who provided inspiration for this "dumb" terminal:
 
 ---
 
-**Remember: In the digital world, the "dumbest" interactions are often the most fun!** 🤪
+**Remember: In the digital world, the "smartest" interactions are often the most fun!** 🤪
 
-*"Welcome to the Matrix... of Dumbness!"* 🖥️
+*"Welcome to the Matrix... of Smartness!"* 🖥️

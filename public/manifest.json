@@ -1,16 +1,16 @@
 {
-  "short_name": "DUMBFUN",
-  "name": "DUMBFUN Terminal",
+  "short_name": "Brain.exe",
+  "name": "Brain.exe Terminal",
   "icons": [
     {
-      "src": "images/aidumb.JPG",
-      "type": "image/jpeg",
+      "src": "brain.png",
+      "type": "image/png",
       "sizes": "any"
     },
     {
-      "src": "images/aidumb.JPG",
+      "src": "brain.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ],
   "start_url": ".",
