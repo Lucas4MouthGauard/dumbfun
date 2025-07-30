@@ -3,12 +3,12 @@
   "name": "SillyBot Terminal",
   "icons": [
     {
-      "src": "brain.png",
+      "src": "sillybot.png",
       "type": "image/png",
       "sizes": "any"
     },
     {
-      "src": "brain.png",
+      "src": "sillybot.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     }
