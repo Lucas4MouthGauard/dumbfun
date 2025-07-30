@@ -172,7 +172,7 @@ const App: React.FC = () => {
     if (animationPhase === 'complete') {
       setTimeout(() => {
         setCommandVisible(true);
-        const command = '> run brain.exe';
+        const command = '> run fwog.fun';
         let currentIndex = 0;
         const interval = setInterval(() => {
           if (currentIndex <= command.length) {
@@ -359,15 +359,15 @@ const App: React.FC = () => {
         output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the FWOG.FUN world:\nAI = Actually Intelligent\n\nWhy?\n1. AI will seriously talk sense\n2. AI will simplify complex problems\n3. AI will pretend to be smart, and actually is smart\n4. AI will process training data, like a genius\n\nConclusion: AI is just advanced intelligence!\n\nBut smart people have their cute side! 😄`;
         break;
       case 'chatgpt':
-        output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk sense\n\nIn the Brain.exe world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write concise answers, even if more detail is needed\n3. Will pretend to be professional, and actually is professional\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed smart! 😂`;
+        output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk sense\n\nIn the FWOG.FUN world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write concise answers, even if more detail is needed\n3. Will pretend to be professional, and actually is professional\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed smart! 😂`;
         break;
       case 'neural':
       case 'neural network':
-        output = `🧠 Neural Network Explanation! 🧠\n\nWhat is a neural network?\n\nSimply put:\n- A bunch of mathematical formulas\n- Algorithms that simulate the human brain\n- Code that can "learn"\n\nIn the Brain.exe world:\nNeural Network = Smart Network\n\nWhy?\n1. Sometimes it suddenly "gets smart"\n2. Makes intelligent decisions\n3. During training, it learns efficiently like a genius\n4. Results often leave people impressed\n\nJust like the human brain, sometimes it gets brilliant! 🤪`;
+        output = `🧠 Neural Network Explanation! 🧠\n\nWhat is a neural network?\n\nSimply put:\n- A bunch of mathematical formulas\n- Algorithms that simulate the human brain\n- Code that can "learn"\n\nIn the FWOG.FUN world:\nNeural Network = Smart Network\n\nWhy?\n1. Sometimes it suddenly "gets smart"\n2. Makes intelligent decisions\n3. During training, it learns efficiently like a genius\n4. Results often leave people impressed\n\nJust like the human brain, sometimes it gets brilliant! 🤪`;
         break;
       case 'machine learning':
       case 'ml':
-        output = `🤖 Machine Learning Explanation! 🤖\n\nWhat is machine learning?\n\nOfficial definition: Let machines learn from data\n\nBrain.exe definition: Make machines smarter\n\nWhy?\n1. Machines are already smart\n2. After learning, they\'re even smarter, just smart in a more regular way\n3. Sometimes they "learn" right things\n4. Results often make people impressed and amazed\n\nLike teaching a smart person to learn, they get even smarter!\n\nBut... at least they\'re trying! 😅`;
+        output = `🤖 Machine Learning Explanation! 🤖\n\nWhat is machine learning?\n\nOfficial definition: Let machines learn from data\n\nFWOG.FUN definition: Make machines smarter\n\nWhy?\n1. Machines are already smart\n2. After learning, they\'re even smarter, just smart in a more regular way\n3. Sometimes they "learn" right things\n4. Results often make people impressed and amazed\n\nLike teaching a smart person to learn, they get even smarter!\n\nBut... at least they\'re trying! 😅`;
         break;
       case 'blockchain':
         output = `⛓️ Blockchain Explanation Time! ⛓️\n\nWhat is blockchain?\n\nOfficial term: Distributed ledger technology\n\nBrain.exe term: Use the most efficient way to keep accounts\n\nWhy efficient?\n1. Problems that could be solved with Excel\n2. Insist on making it decentralized\n3. Every node needs to verify\n4. Results can still be wrong\n\nLike:\n- Could just send a WeChat transfer\n- Insist on using blockchain\n- Spend $100 fee to transfer $1\n- Still need to wait 10 minutes for confirmation\n\nBut... at least it looks cool! 😎`;
