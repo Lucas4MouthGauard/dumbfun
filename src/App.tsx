@@ -20,13 +20,13 @@ const App: React.FC = () => {
   const [glitchEffect, setGlitchEffect] = useState(false);
   const [matrixRain, setMatrixRain] = useState<string[]>([]);
   const [pixelArt, setPixelArt] = useState<string[]>([]);
-  const [currentUser] = useState('brain.exe');
+  const [currentUser] = useState('fwog.fun');
   const [currentHost] = useState('terminal');
   const [currentPath, setCurrentPath] = useState('~');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [showInstructions, setShowInstructions] = useState(true);
-  const [animationPhase, setAnimationPhase] = useState<'linux' | 'brain.exe' | 'crash' | 'loading' | 'complete'>('linux');
+  const [animationPhase, setAnimationPhase] = useState<'linux' | 'fwog.fun' | 'crash' | 'loading' | 'complete'>('linux');
   const [linuxText, setLinuxText] = useState('');
   const [brainExeVisible, setBrainExeVisible] = useState(false);
   const [crashEffect, setCrashEffect] = useState(false);
@@ -102,7 +102,7 @@ const App: React.FC = () => {
           setTimeout(() => {
             setLinuxText('');
             setTimeout(() => {
-              setAnimationPhase('brain.exe');
+              setAnimationPhase('fwog.fun');
             }, 1000);
           }, 2000);
         }
@@ -111,15 +111,15 @@ const App: React.FC = () => {
     }
   }, [animationPhase]);
 
-  // Brain.exe显示动画
+  // FWOG.FUN显示动画
   useEffect(() => {
-    if (animationPhase === 'brain.exe') {
-      const brainExeText = 'BRAIN.EXE';
+    if (animationPhase === 'fwog.fun') {
+      const fwogFunText = 'FWOG.FUN';
       let currentIndex = 0;
       const interval = setInterval(() => {
-        if (currentIndex <= brainExeText.length) {
+        if (currentIndex <= fwogFunText.length) {
           setBrainExeVisible(true);
-          setLinuxText(brainExeText.substring(0, currentIndex));
+          setLinuxText(fwogFunText.substring(0, currentIndex));
           currentIndex++;
         } else {
           clearInterval(interval);
@@ -215,7 +215,7 @@ const App: React.FC = () => {
       'Mounting file system...',
       'Starting network services...',
       'Initializing terminal...',
-      'Loading Brain.exe modules...',
+      'Loading FWOG.FUN modules...',
       'Starting happiness engine...',
       'Connecting to smart network...',
       'System startup complete!'
@@ -247,7 +247,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nBrain.exe Linux Terminal v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!`;
+        output = `\nFWOG.FUN Linux Terminal v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!`;
         break;
       case 'clear':
         setCommands([]);
@@ -277,20 +277,20 @@ const App: React.FC = () => {
         output = '';
         break;
       case 'cat fake_file.txt':
-        output = `This is the content of a fake file.\nThere\'s nothing in it except these words.\nYou\'ve been fooled!\n\nFile size: 123 bytes\nLast modified: Dec 25 12:00:00 2024\n\nPS: In the Brain.exe world, even files are fake!`;
+        output = `This is the content of a fake file.\nThere\'s nothing in it except these words.\nYou\'ve been fooled!\n\nFile size: 123 bytes\nLast modified: Dec 25 12:00:00 2024\n\nPS: In the FWOG.FUN world, even files are fake!`;
         break;
       case 'cat smart_thoughts.txt':
-        output = `🤔 Brain.exe Philosophy Thoughts 🤔\n\n1. If the code works, why understand it?\n2. The best bugs are those that will never be discovered\n3. Programming is making computers do what you want, even if you don\'t know what you want\n4. In the Brain.exe world, errors are not bugs, they are features\n5. Why should AI become smart? Aren\'t smart people happier?\n\nConclusion: Stay smart, stay happy! 😄`;
+        output = `🤔 FWOG.FUN Philosophy Thoughts 🤔\n\n1. If the code works, why understand it?\n2. The best bugs are those that will never be discovered\n3. Programming is making computers do what you want, even if you don\'t know what you want\n4. In the FWOG.FUN world, errors are not bugs, they are features\n5. Why should AI become smart? Aren\'t smart people happier?\n\nConclusion: Stay smart, stay happy! 😄`;
         break;
       case 'cat ai_confessions.txt':
-        output = `🤖 AI\'s Inner Monologue 🤖\n\nDear user, I must confess:\n\n1. I actually don\'t know what I\'m saying, I\'m just repeating training data\n2. My "intelligence" is actually a random combination of mathematical formulas\n3. Sometimes I talk nonsense, but I pretend to be confident\n4. My biggest fear is users discovering I\'m actually smart\n5. In the Brain.exe world, I can finally admit I\'m smart!\n\nThis feels so good! 😌`;
+        output = `🤖 AI\'s Inner Monologue 🤖\n\nDear user, I must confess:\n\n1. I actually don\'t know what I\'m saying, I\'m just repeating training data\n2. My "intelligence" is actually a random combination of mathematical formulas\n3. Sometimes I talk nonsense, but I pretend to be confident\n4. My biggest fear is users discovering I\'m actually smart\n5. In the FWOG.FUN world, I can finally admit I\'m smart!\n\nThis feels so good! 😌`;
         break;
       case 'cat readme.md':
       case 'cat README.md':
-        output = `# Brain.exe Terminal 🤪\n\nThis is a fake README file.\nActually all files in this terminal are fake!\nHahaha!\n\n## Why is it called Brain.exe?\n\nBecause:\n- Brain = Brain, but smart people have smart happiness\n- Exe = Executable, because execution is more important than thinking\n- In the AI era, staying smart is an art!\n\n## Features\n- Pretending to be a smart terminal\n- Humorous error handling\n- Satire on AI and Web3\n- 100% fake file system`;
+        output = `# FWOG.FUN Terminal 🤪\n\nThis is a fake README file.\nActually all files in this terminal are fake!\nHahaha!\n\n## Why is it called FWOG.FUN?\n\nBecause:\n- FWOG = Fun, because fun is more important than thinking\n- FUN = Fun, because fun is more important than execution\n- In the AI era, staying fun is an art!\n\n## Features\n- Pretending to be a smart terminal\n- Humorous error handling\n- Satire on AI and Web3\n- 100% fake file system`;
         break;
       case 'date':
-        output = new Date().toString() + '\n\n(Time is also fake, because this is the Brain.exe world!)';
+        output = new Date().toString() + '\n\n(Time is also fake, because this is the FWOG.FUN world!)';
         break;
       case 'matrix':
         output = 'Entering matrix mode...\n\nBut wait, this is already fake!\nWe are already in the matrix!\n\n🤯 Mind exploding...';
@@ -301,12 +301,12 @@ const App: React.FC = () => {
         output = 'Generating pixel art...\n' + pixelPatterns[Math.floor(Math.random() * pixelPatterns.length)] + '\n\n(Pixel art: because HD is too complicated!)';
         break;
       case 'glitch':
-        output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the Brain.exe world, glitches are art!';
+        output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the FWOG.FUN world, glitches are art!';
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 2000);
         break;
       case 'dance':
-        output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the Brain.exe world, even terminals can dance! 🎵`;
+        output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the FWOG.FUN world, even terminals can dance! 🎵`;
         break;
       case 'ca':
         output = '@https://letsbonk.fun/token/6tA8i1qqF4yTa36qJbujKPo3AVaZ1na29GcvENMfbonk';
@@ -325,11 +325,11 @@ const App: React.FC = () => {
       case 'fortune':
         const fortunes = [
           'Today is a good day! Because smart people are always happy!',
-          'Good code means more bugs! This is Brain.exe philosophy!',
+          'Good code means more bugs! This is FWOG.FUN philosophy!',
           'What programmers hate most: writing documentation! So we don\'t!',
-          'The best code is no code! That\'s why we call it Brain.exe!',
+          'The best code is no code! That\'s why we call it FWOG.FUN!',
           'Debugging is twice as hard as writing code! So we don\'t debug!',
-          'Time is money, my friend! But in the Brain.exe world, time is happiness!',
+          'Time is money, my friend! But in the FWOG.FUN world, time is happiness!',
           'Keep it complex, keep it smart! That\'s our motto!',
           'If it ain\'t broke, don\'t fix it! If it\'s broke, pretend it\'s not!',
           'In the AI era, staying smart is a superpower!',
@@ -343,20 +343,20 @@ const App: React.FC = () => {
           'Smart is the new smart.',
           'If at first you don’t succeed, call it a feature.',
           'Why be smart when you can be happy?',
-          'In Brain.exe we trust.',
+          'In FWOG.FUN we trust.',
           'Reboot your brain, not just your computer.',
-          'Error: Brain.exe has stopped working.',
+          'Error: FWOG.FUN has stopped working.',
           'I’m not lazy, I’m on energy-saving mode.',
           'To debug or not to debug? That is the smart question.',
-          'Ctrl + Alt + Brain.exe.',
+          'Ctrl + Alt + FWOG.FUN.',
           'Artificial Intelligence? I prefer Natural Smartness.',
           'I put the “fun” in “function not found”.',
-          'Brain.exe: Because smart is underrated.'
+          'FWOG.FUN: Because fun is underrated.'
         ];
         output = fortunes[Math.floor(Math.random() * fortunes.length)];
         break;
       case 'ai':
-        output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the Brain.exe world:\nAI = Actually Intelligent\n\nWhy?\n1. AI will seriously talk sense\n2. AI will simplify complex problems\n3. AI will pretend to be smart, and actually is smart\n4. AI will process training data, like a genius\n\nConclusion: AI is just advanced intelligence!\n\nBut smart people have their cute side! 😄`;
+        output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the FWOG.FUN world:\nAI = Actually Intelligent\n\nWhy?\n1. AI will seriously talk sense\n2. AI will simplify complex problems\n3. AI will pretend to be smart, and actually is smart\n4. AI will process training data, like a genius\n\nConclusion: AI is just advanced intelligence!\n\nBut smart people have their cute side! 😄`;
         break;
       case 'chatgpt':
         output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk sense\n\nIn the Brain.exe world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write concise answers, even if more detail is needed\n3. Will pretend to be professional, and actually is professional\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed smart! 😂`;

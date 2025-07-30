@@ -1,4 +1,4 @@
-# Brain.exe 🤪 - Retro Command Line Style Smart Terminal
+# FWOG.FUN 🤪 - Retro Command Line Style Smart Terminal
 
 A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 
@@ -86,7 +86,7 @@ A completely redesigned retro command line style React web application, combinin
 1. **Clone the project**
    ```bash
    git clone <repository-url>
-   cd brain.exe
+   cd fwog.fun
    ```
 
 2. **Install dependencies**
