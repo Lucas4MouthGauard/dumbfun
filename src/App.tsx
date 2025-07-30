@@ -308,8 +308,8 @@ const App: React.FC = () => {
       case 'dance':
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the FWOG.FUN world, even terminals can dance! 🎵`;
         break;
-      case 'ca':
-        output = '@https://letsbonk.fun/token/6tA8i1qqF4yTa36qJbujKPo3AVaZ1na29GcvENMfbonk';
+              case 'ca':
+          output = 'Coming Soon';
         break;
       case 'x':
       case 'twitter':
