@@ -1,4 +1,4 @@
-# SillyDoge 🤪 - Retro Command Line Style Smart Terminal
+# SillyBot 🤪 - Retro Command Line Style Smart Terminal
 
 A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 
