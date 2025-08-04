@@ -309,11 +309,11 @@ const App: React.FC = () => {
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the DumbFun world, even terminals can dance! 🎵`;
         break;
               case 'ca':
-          output = 'https://letsbonk.fun/token/A5oMfc9sySgk3HaHVrbL4VpSa7EoGKrALMQD3Zu1bonk';
+          output = 'Coming Soon';
         break;
       case 'x':
       case 'twitter':
-        output = 'X@https://x.com/AIBrain_Exe';
+        output = '@https://x.com/DumbFun_meme';
         break;
       case '$vinedoge':
       case 'vinedoge':
