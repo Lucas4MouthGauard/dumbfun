@@ -309,7 +309,9 @@ const App: React.FC = () => {
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the DumbFun world, even terminals can dance! 🎵`;
         break;
               case 'ca':
-          output = 'Coming Soon';
+      case 'Ca':
+      case 'CA':
+          output = 'CEVRk5mJxwJQhiLS4SaC9YUiyYCAa5Lwu3586VK4bonk';
         break;
       case 'x':
       case 'twitter':
