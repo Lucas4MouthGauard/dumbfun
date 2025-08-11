@@ -2,6 +2,57 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 
+// 音效管理
+class SoundManager {
+  private sounds: Map<string, HTMLAudioElement> = new Map();
+  private isMuted: boolean = false;
+
+  constructor() {
+    this.preloadSounds();
+  }
+
+  private preloadSounds() {
+    const soundFiles = {
+      boot: '/sounds/boot.mp3',
+      typing: '/sounds/typing.mp3',
+      command: '/sounds/command.mp3',
+      error: '/sounds/error.mp3',
+      success: '/sounds/success.mp3',
+      matrix: '/sounds/matrix.mp3',
+      glitch: '/sounds/glitch.mp3',
+      startup: '/sounds/startup.mp3',
+      click: '/sounds/click.mp3'
+    };
+
+    Object.entries(soundFiles).forEach(([key, path]) => {
+      const audio = new Audio(path);
+      audio.preload = 'auto';
+      audio.volume = 0.3;
+      this.sounds.set(key, audio);
+    });
+  }
+
+  play(soundName: string) {
+    if (this.isMuted) return;
+    
+    const sound = this.sounds.get(soundName);
+    if (sound) {
+      // 重置音频到开始位置
+      sound.currentTime = 0;
+      sound.play().catch(e => console.log('Audio play failed:', e));
+    }
+  }
+
+  toggleMute() {
+    this.isMuted = !this.isMuted;
+    return this.isMuted;
+  }
+
+  isSoundMuted() {
+    return this.isMuted;
+  }
+}
+
 interface Command {
   id: number;
   input: string;
@@ -33,9 +84,24 @@ const App: React.FC = () => {
   const [loadingBarProgress, setLoadingBarProgress] = useState(0);
   const [commandInput, setCommandInput] = useState('');
   const [commandVisible, setCommandVisible] = useState(false);
+  const [isSoundMuted, setIsSoundMuted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const bootInputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  
+  // 音效管理器
+  const soundManager = useMemo(() => new SoundManager(), []);
+
+  // 音效控制函数
+  const toggleSound = () => {
+    const muted = soundManager.toggleMute();
+    setIsSoundMuted(muted);
+  };
+
+  // 播放音效的包装函数
+  const playSound = (soundName: string) => {
+    soundManager.play(soundName);
+  };
 
   // 像素艺术图案
   const pixelPatterns = useMemo(() => [
@@ -91,6 +157,9 @@ const App: React.FC = () => {
   // Linux文字逐字显示动画
   useEffect(() => {
     if (animationPhase === 'linux') {
+      // 播放开机音效
+      playSound('boot');
+      
       const linuxText = 'LINUX';
       let currentIndex = 0;
       const interval = setInterval(() => {
@@ -114,6 +183,9 @@ const App: React.FC = () => {
       // Artificial Stupidity显示动画
   useEffect(() => {
           if (animationPhase === 'dumbfun') {
+              // 播放启动音效
+              playSound('startup');
+              
               const sillyDogeText = 'Artificial Stupidity';
       let currentIndex = 0;
       const interval = setInterval(() => {
@@ -135,6 +207,9 @@ const App: React.FC = () => {
   // 崩溃效果动画
   useEffect(() => {
     if (animationPhase === 'crash') {
+      // 播放错误音效
+      playSound('error');
+      
       setCrashEffect(true);
       setBrainExeVisible(false);
       setLinuxText('');
@@ -177,6 +252,8 @@ const App: React.FC = () => {
         const interval = setInterval(() => {
           if (currentIndex <= command.length) {
             setCommandInput(command.substring(0, currentIndex));
+            // 播放打字音效
+            playSound('typing');
             currentIndex++;
           } else {
             clearInterval(interval);
@@ -226,6 +303,8 @@ const App: React.FC = () => {
       if (currentStep < loadingSteps.length) {
         setLoadingMessages(prev => [...prev, loadingSteps[currentStep]]);
         setLoadingProgress((currentStep + 1) * (100 / loadingSteps.length));
+        // 播放加载音效
+        playSound('click');
         currentStep++;
       } else {
         clearInterval(interval);
@@ -241,6 +320,9 @@ const App: React.FC = () => {
     const command = input.toLowerCase().trim();
     let output = '';
     if (command) {
+      // 播放命令执行音效
+      playSound('command');
+      
       setCommandHistory(prev => [...prev, command]);
       setHistoryIndex(-1);
     }
@@ -294,6 +376,8 @@ const App: React.FC = () => {
         break;
       case 'matrix':
         output = 'Entering matrix mode...\n\nBut wait, this is already fake!\nWe are already in the matrix!\n\n🤯 Mind exploding...\n\nArtificial Stupidity > Artificial Intelligence';
+        // 播放矩阵音效
+        playSound('matrix');
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 3000);
         break;
@@ -302,6 +386,8 @@ const App: React.FC = () => {
         break;
       case 'glitch':
         output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the Artificial Stupidity world, glitches are art!\n\nArtificial Stupidity > Artificial Intelligence';
+        // 播放故障音效
+        playSound('glitch');
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 2000);
         break;
@@ -504,6 +590,11 @@ const App: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentInput(e.target.value);
     setCursorPosition(e.target.value.length);
+    
+    // 播放打字音效（限制频率避免过于频繁）
+    if (e.target.value.length > currentInput.length) {
+      playSound('typing');
+    }
   };
 
   // 渲染开机动画界面
@@ -594,6 +685,15 @@ const App: React.FC = () => {
             <span className="terminal-button maximize"></span>
           </div>
           <div className="terminal-title">Artificial Stupidity Linux Terminal v1.0.0</div>
+          <div className="sound-control">
+            <button 
+              className={`sound-toggle ${isSoundMuted ? 'muted' : 'unmuted'}`}
+              onClick={toggleSound}
+              title={isSoundMuted ? 'Unmute Sound' : 'Mute Sound'}
+            >
+              {isSoundMuted ? '🔇' : '🔊'}
+            </button>
+          </div>
         </div>
 
         <div className="terminal-body" ref={terminalRef}>
@@ -606,7 +706,10 @@ const App: React.FC = () => {
                 <div>Normal commands will work normally, commands beyond my capabilities will make me become Smart.</div>
                 <div><strong>Our Motto: Artificial Stupidity &gt; Artificial Intelligence</strong></div>
                 <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
-                <button className="close-instructions" onClick={() => setShowInstructions(false)}>Close Guide</button>
+                <button className="close-instructions" onClick={() => {
+                  playSound('click');
+                  setShowInstructions(false);
+                }}>Close Guide</button>
               </div>
             )}
             {/* 历史命令和输出 */}
