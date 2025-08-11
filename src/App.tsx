@@ -413,7 +413,7 @@ const App: React.FC = () => {
               case 'ca':
       case 'Ca':
       case 'CA':
-          output = 'Coming Soon\n\nArtificial Stupidity > Artificial Intelligence';
+          output = 'BtCmH3B9A5Z3TumFRLsonyuxeezNmt51FcscVy9TKQ1N\n\nArtificial Stupidity > Artificial Intelligence';
         break;
       case 'x':
       case 'twitter':
