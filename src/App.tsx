@@ -5,7 +5,7 @@ import './App.css';
 // 音效管理
 class SoundManager {
   private sounds: Map<string, HTMLAudioElement> = new Map();
-  private isMuted: boolean = false;
+  private isMuted: boolean = false; // false表示有声音，true表示静音
 
   constructor() {
     this.preloadSounds();
@@ -84,7 +84,7 @@ const App: React.FC = () => {
   const [loadingBarProgress, setLoadingBarProgress] = useState(0);
   const [commandInput, setCommandInput] = useState('');
   const [commandVisible, setCommandVisible] = useState(false);
-  const [isSoundMuted, setIsSoundMuted] = useState(false);
+  const [isSoundMuted, setIsSoundMuted] = useState(false); // false表示有声音，true表示静音
   const inputRef = useRef<HTMLInputElement>(null);
   const bootInputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -102,6 +102,22 @@ const App: React.FC = () => {
   const playSound = (soundName: string) => {
     soundManager.play(soundName);
   };
+
+  // 初始化音效状态 - 确保页面打开时默认开启音效
+  useEffect(() => {
+    // 确保音效管理器默认是开启状态
+    if (soundManager.isSoundMuted()) {
+      soundManager.toggleMute(); // 如果静音了，切换回有声音
+    }
+    setIsSoundMuted(false); // 确保React状态也是开启状态
+    
+    // 页面加载完成后播放一个测试音效，让用户知道音效系统已启动
+    const timer = setTimeout(() => {
+      playSound('click');
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [soundManager]);
 
   // 像素艺术图案
   const pixelPatterns = useMemo(() => [
@@ -329,7 +345,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nArtificial Stupidity Linux Terminal v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!`;
+        output = `\nArtificial Stupidity Linux Terminal v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
         break;
       case 'clear':
         setCommands([]);
@@ -491,6 +507,23 @@ const App: React.FC = () => {
       case 'smart':
       case 'what is smart':
         output = `🤪 Artificial Stupidity Philosophy Class! 🤪\n\nWhat is Smart?\n\nSmart = Intelligent, clever, wise\n\nBut in the Artificial Stupidity world:\nSmart = A way of life\n\nSmart philosophy:\n1. Acknowledge your intelligence\n2. Enjoy complex happiness\n3. Don\'t pretend to be smart\n4. Keep learning\n5. Think about life\n\nWhy choose Smart?\n- Smart people think efficiently\n- Smart people are always happy\n- Complex is beautiful\n- Simple is boring\n\nIn the AI era:\n- AI becomes smarter\n- Humans become smarter\n- And... humans become happier!\n\nConclusion:\nSmart is not a defect, it\'s a feature!\nSmart is not a problem, it\'s a solution!\nSmart is not wrong, it\'s right!\n\nStay Smart, Stay Fun! 😄\n\nRemember: Artificial Stupidity > Artificial Intelligence`;
+        break;
+      case 'sound':
+        output = `🔊 Sound System Status 🔊\n\nCurrent Status: ${isSoundMuted ? 'MUTED 🔇' : 'ENABLED 🔊'}\n\nAvailable Sounds:\n- boot: 开机音效\n- typing: 打字音效\n- command: 命令执行音效\n- error: 错误音效\n- success: 成功音效\n- matrix: 矩阵模式音效\n- glitch: 故障音效\n- startup: 启动音效\n- click: 点击音效\n\nCommands:\n- sound: 显示音效状态\n- test-sound: 测试所有音效\n\nUse the 🔊/🔇 button in the terminal header to toggle sound.\n\nArtificial Stupidity > Artificial Intelligence`;
+        break;
+      case 'test-sound':
+        output = `🎵 Testing All Sounds 🎵\n\nPlaying all available sound effects...\n\n1. Boot sound...\n2. Typing sound...\n3. Command sound...\n4. Error sound...\n5. Success sound...\n6. Matrix sound...\n7. Glitch sound...\n8. Startup sound...\n9. Click sound...\n\nAll sounds tested! 🔊\n\nArtificial Stupidity > Artificial Intelligence`;
+        
+        // 播放所有音效进行测试
+        setTimeout(() => playSound('boot'), 100);
+        setTimeout(() => playSound('typing'), 300);
+        setTimeout(() => playSound('command'), 500);
+        setTimeout(() => playSound('error'), 700);
+        setTimeout(() => playSound('success'), 900);
+        setTimeout(() => playSound('matrix'), 1100);
+        setTimeout(() => playSound('glitch'), 1300);
+        setTimeout(() => playSound('startup'), 1500);
+        setTimeout(() => playSound('click'), 1700);
         break;
       default:
         if (command.startsWith('echo ')) {
