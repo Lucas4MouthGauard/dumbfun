@@ -1,24 +1,24 @@
 {
-  "short_name": "DumbFun",
-  "name": "DumbFun Terminal",
+  "short_name": "Artificial Stupidity",
+  "name": "Artificial Stupidity Terminal",
   "icons": [
     {
-      "src": "dumbfun.png",
+      "src": "images/StupidAI.png",
       "type": "image/png",
       "sizes": "any"
     },
     {
-      "src": "dumbfun.png",
+      "src": "images/StupidAI.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "dumbfun.png",
+      "src": "images/StupidAI.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "dumbfun.png",
+      "src": "images/StupidAI.png",
       "sizes": "512x512",
       "type": "image/png"
     }
