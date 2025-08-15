@@ -413,11 +413,11 @@ const App: React.FC = () => {
               case 'ca':
       case 'Ca':
       case 'CA':
-          output = 'Coming Soon\n\nSmart > Artificial Intelligence';
+          output = 'Coming Soon';
         break;
       case 'x':
       case 'twitter':
-        output = '@https://x.com/StupidAI_meme\n\nSmart > Artificial Intelligence';
+        output = '@https://x.com/LINUX_pump';
         break;
       case '$vinedoge':
       case 'vinedoge':
