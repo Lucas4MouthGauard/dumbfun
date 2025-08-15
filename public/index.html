@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
     <link rel="icon" href="%PUBLIC_URL%/images/linuxpump.png" type="image/png" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/images/linuxpump.png" type="image/png" />
     <link rel="icon" href="%PUBLIC_URL%/images/linuxpump.png" type="image/x-icon" />
@@ -10,14 +17,12 @@
     <link rel="icon" href="%PUBLIC_URL%/images/linuxpump.png" sizes="48x48" type="image/png" />
     <link rel="icon" href="%PUBLIC_URL%/images/linuxpump.png" sizes="192x192" type="image/png" />
     <link rel="icon" href="%PUBLIC_URL%/images/linuxpump.png" sizes="512x512" type="image/png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Smart Terminal - Retro Command Line Style Terminal"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/linuxpump.png" />
     <!--
@@ -39,6 +44,25 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
+    <!-- MetaMask Error Handler -->
+    <script>
+      // 防止MetaMask连接错误
+      window.addEventListener('error', function(e) {
+        if (e.message && e.message.includes('MetaMask')) {
+          e.preventDefault();
+          console.log('MetaMask connection error prevented');
+        }
+      });
+      
+      // 防止未捕获的Promise拒绝
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e.reason && e.reason.message && e.reason.message.includes('MetaMask')) {
+          e.preventDefault();
+          console.log('MetaMask promise rejection prevented');
+        }
+      });
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
