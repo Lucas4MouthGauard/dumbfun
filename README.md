@@ -1,4 +1,4 @@
-# Artificial Stupidity 🤪 - Retro Command Line Style Smart Terminal
+# Smart Terminal 🤪 - Retro Command Line Style Smart Terminal
 
 A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 
@@ -86,7 +86,7 @@ A completely redesigned retro command line style React web application, combinin
 1. **Clone the project**
    ```bash
    git clone <repository-url>
-   cd artificial-stupidity
+   cd smart-terminal
    ```
 
 2. **Install dependencies**
@@ -191,6 +191,6 @@ Thanks to all who provided inspiration for this "smart" terminal:
 
 **Remember: In the digital world, the "smartest" interactions are often the most fun!** 🤪
 
-**Our Motto: Artificial Stupidity > Artificial Intelligence** 🧠
+**Our Motto: Smart > Artificial Intelligence** 🧠
 
 *"Welcome to the Matrix... of Smartness!"* 🖥️
