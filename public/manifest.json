@@ -1,6 +1,6 @@
 {
-  "short_name": "Smart Terminal",
-  "name": "Smart Terminal",
+  "short_name": "LinuxPump",
+  "name": "LinuxPump Terminal",
   "icons": [
     {
       "src": "favicon.ico",
