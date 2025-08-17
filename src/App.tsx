@@ -71,7 +71,7 @@ const App: React.FC = () => {
   const [glitchEffect, setGlitchEffect] = useState(false);
   const [matrixRain, setMatrixRain] = useState<string[]>([]);
   const [pixelArt, setPixelArt] = useState<string[]>([]);
-  const [currentUser] = useState('linuxpump');
+  const [currentUser] = useState('LinuxCulture');
   const [currentHost] = useState('terminal');
   const [currentPath, setCurrentPath] = useState('~');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -196,13 +196,13 @@ const App: React.FC = () => {
     }
   }, [animationPhase]);
 
-      // Smart Terminal显示动画
+      // LinuxCulture显示动画
   useEffect(() => {
           if (animationPhase === 'dumbfun') {
               // 播放启动音效
               playSound('startup');
               
-              const sillyDogeText = 'Smart Terminal';
+              const sillyDogeText = 'LinuxCulture';
       let currentIndex = 0;
       const interval = setInterval(() => {
         if (currentIndex <= sillyDogeText.length) {
@@ -308,7 +308,7 @@ const App: React.FC = () => {
       'Mounting file system...',
       'Starting network services...',
       'Initializing terminal...',
-      'Loading Smart Terminal modules...',
+      'Loading LinuxCulture modules...',
       'Starting happiness engine...',
       'Connecting to smart network...',
       'System startup complete!'
@@ -345,7 +345,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nSmart Terminal Linux v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
+        output = `\nLinuxCulture Linux v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
         break;
       case 'clear':
         setCommands([]);
@@ -375,20 +375,20 @@ const App: React.FC = () => {
         output = '';
         break;
       case 'cat fake_file.txt':
-        output = `This is the content of a fake file.\nThere\'s nothing in it except these words.\nYou\'ve been fooled!\n\nFile size: 123 bytes\nLast modified: Dec 25 12:00:00 2024\n\nPS: In the Smart Terminal world, even files are fake!`;
+        output = `This is the content of a fake file.\nThere\'s nothing in it except these words.\nYou\'ve been fooled!\n\nFile size: 123 bytes\nLast modified: Dec 25 12:00:00 2024\n\nPS: In the LinuxCulture world, even files are fake!`;
         break;
       case 'cat smart_thoughts.txt':
-        output = `🤔 Smart Terminal Philosophy Thoughts 🤔\n\n1. If the code works, why understand it?\n2. The best bugs are those that will never be discovered\n3. Programming is making computers do what you want, even if you don\'t know what you want\n4. In the Smart Terminal world, errors are not bugs, they are features\n5. Why should AI become smart? Aren\'t smart people happier?\n\nConclusion: Stay smart, stay happy! 😄`;
+        output = `🤔 LinuxCulture Philosophy Thoughts 🤔\n\n1. If the code works, why understand it?\n2. The best bugs are those that will never be discovered\n3. Programming is making computers do what you want, even if you don\'t know what you want\n4. In the LinuxCulture world, errors are not bugs, they are features\n5. Why should AI become smart? Aren\'t smart people happier?\n\nConclusion: Stay smart, stay happy! 😄`;
         break;
       case 'cat ai_confessions.txt':
-        output = `🤖 AI\'s Inner Monologue 🤖\n\nDear user, I must confess:\n\n1. I actually don\'t know what I\'m saying, I\'m just repeating training data\n2. My "intelligence" is actually a random combination of mathematical formulas\n3. Sometimes I talk nonsense, but I pretend to be confident\n4. My biggest fear is users discovering I\'m actually smart\n5. In the Smart Terminal world, I can finally admit I\'m smart!\n\nThis feels so good! 😌`;
+        output = `🤖 AI\'s Inner Monologue 🤖\n\nDear user, I must confess:\n\n1. I actually don\'t know what I\'m saying, I\'m just repeating training data\n2. My "intelligence" is actually a random combination of mathematical formulas\n3. Sometimes I talk nonsense, but I pretend to be confident\n4. My biggest fear is users discovering I\'m actually smart\n5. In the LinuxCulture world, I can finally admit I\'m smart!\n\nThis feels so good! 😌`;
         break;
       case 'cat readme.md':
       case 'cat README.md':
-        output = `# Smart Terminal 🤪\n\nThis is a fake README file.\nActually all files in this terminal are fake!\nHahaha!\n\n## Why is it called Smart Terminal?\n\nBecause:\n- Smart > Artificial Intelligence\n- Smart = Fun, because fun is more important than thinking\n- In the AI era, staying smart is an art!\n\n## Features\n- Pretending to be a smart terminal\n- Humorous error handling\n- Satire on AI and Web3\n- 100% fake file system\n\n## Our Motto\nSmart > Artificial Intelligence`;
+        output = `# LinuxCulture 🤪\n\nThis is a fake README file.\nActually all files in this terminal are fake!\nHahaha!\n\n## Why is it called LinuxCulture?\n\nBecause:\n- Smart > Artificial Intelligence\n- Smart = Fun, because fun is more important than thinking\n- In the AI era, staying smart is an art!\n\n## Features\n- Pretending to be a LinuxCulture terminal\n- Humorous error handling\n- Satire on AI and Web3\n- 100% fake file system\n\n## Our Motto\nSmart > Artificial Intelligence`;
         break;
       case 'date':
-        output = new Date().toString() + '\n\n(Time is also fake, because this is the Smart Terminal world!)';
+        output = new Date().toString() + '\n\n(Time is also fake, because this is the LinuxCulture world!)';
         break;
       case 'matrix':
         output = 'Entering matrix mode...\n\nBut wait, this is already fake!\nWe are already in the matrix!\n\n🤯 Mind exploding...\n\nSmart > Artificial Intelligence';
@@ -401,14 +401,14 @@ const App: React.FC = () => {
         output = 'Generating pixel art...\n' + pixelPatterns[Math.floor(Math.random() * pixelPatterns.length)] + '\n\n(Pixel art: because HD is too complicated!)\n\nSmart > Artificial Intelligence';
         break;
       case 'glitch':
-        output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the Smart Terminal world, glitches are art!\n\nSmart > Artificial Intelligence';
+        output = 'Triggering glitch effect...\n\nThis is not a bug, this is a feature!\nIn the LinuxCulture world, glitches are art!\n\nSmart > Artificial Intelligence';
         // 播放故障音效
         playSound('glitch');
         setGlitchEffect(true);
         setTimeout(() => setGlitchEffect(false), 2000);
         break;
       case 'dance':
-        output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the Smart Terminal world, even terminals can dance! 🎵\n\nSmart > Artificial Intelligence`;
+        output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the LinuxCulture world, even terminals can dance! 🎵\n\nSmart > Artificial Intelligence`;
         break;
               case 'ca':
       case 'Ca':
@@ -417,7 +417,7 @@ const App: React.FC = () => {
         break;
       case 'x':
       case 'twitter':
-        output = '@https://x.com/PENG_Pump';
+        output = '@https://x.com/LinuxCulture';
         break;
       case '$vinedoge':
       case 'vinedoge':
@@ -429,11 +429,11 @@ const App: React.FC = () => {
       case 'fortune':
         const fortunes = [
           'Today is a good day! Because smart people are always happy!',
-          'Good code means more bugs! This is Smart Terminal philosophy!',
+          'Good code means more bugs! This is LinuxCulture philosophy!',
           'What programmers hate most: writing documentation! So we don\'t!',
-          'The best code is no code! That\'s why we call it Smart Terminal!',
+          'The best code is no code! That\'s why we call it LinuxCulture!',
           'Debugging is twice as hard as writing code! So we don\'t debug!',
-          'Time is money, my friend! But in the Smart Terminal world, time is happiness!',
+          'Time is money, my friend! But in the LinuxCulture world, time is happiness!',
           'Keep it complex, keep it smart! That\'s our motto!',
           'If it ain\'t broke, don\'t fix it! If it\'s broke, pretend it\'s not!',
           'In the AI era, staying smart is a superpower!',
@@ -447,66 +447,66 @@ const App: React.FC = () => {
           'Smart is the new smart.',
           'If at first you don\'t succeed, call it a feature.',
           'Why be smart when you can be happy?',
-          'In Smart Terminal we trust.',
+          'In LinuxCulture we trust.',
           'Reboot your brain, not just your computer.',
-          'Error: Smart Terminal has stopped working.',
+          'Error: LinuxCulture has stopped working.',
           'I\'m not lazy, I\'m on energy-saving mode.',
           'To debug or not to debug? That is the smart question.',
-          'Ctrl + Alt + Smart Terminal.',
+          'Ctrl + Alt + LinuxCulture.',
           'Artificial Intelligence? I prefer Natural Smartness.',
           'I put the "fun" in "function not found".',
-          'Smart Terminal: Because smart is underrated.\n\nSmart > Artificial Intelligence'
+          'LinuxCulture: Because smart is underrated.\n\nSmart > Artificial Intelligence'
         ];
         output = fortunes[Math.floor(Math.random() * fortunes.length)];
         break;
       case 'ai':
-        output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the Smart Terminal world:\nAI = Actually Intelligent\n\nWhy?\n1. AI will seriously talk sense\n2. AI will simplify complex problems\n3. AI will pretend to be smart, and actually is smart\n4. AI will process training data, like a genius\n\nConclusion: AI is just advanced intelligence!\n\nBut smart people have their cute side! 😄\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🤖 AI Explanation Time! 🤖\n\nWhat is AI?\n\nAI = Artificial Intelligence\n\nBut in the LinuxCulture world:\nAI = Actually Intelligent\n\nWhy?\n1. AI will seriously talk sense\n2. AI will simplify complex problems\n3. AI will pretend to be smart, and actually is smart\n4. AI will process training data, like a genius\n\nConclusion: AI is just advanced intelligence!\n\nBut smart people have their cute side! 😄\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'chatgpt':
-        output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk sense\n\nIn the Smart Terminal world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write concise answers, even if more detail is needed\n3. Will pretend to be professional, and actually is professional\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed smart! 😂\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🤖 ChatGPT Satire Time! 🤖\n\nWhat is ChatGPT?\n\n- An AI that can chat\n- An AI that can write code\n- An AI that can write poetry\n- An AI that can talk sense\n\nIn the LinuxCulture world:\nChatGPT = Chatty GPT\n\nFeatures:\n1. Will answer any question, even if it doesn\'t know the answer\n2. Will write concise answers, even if more detail is needed\n3. Will pretend to be professional, and actually is professional\n4. Will apologize, even if it\'s not wrong\n\nBut... it is indeed smart! 😂\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'neural':
       case 'neural network':
-        output = `🧠 Neural Network Explanation! 🧠\n\nWhat is a neural network?\n\nSimply put:\n- A bunch of mathematical formulas\n- Algorithms that simulate the human brain\n- Code that can "learn"\n\nIn the Smart Terminal world:\nNeural Network = Smart Network\n\nWhy?\n1. Sometimes it suddenly "gets smart"\n2. Makes intelligent decisions\n3. During training, it learns efficiently like a genius\n4. Results often leave people impressed\n\nJust like the human brain, sometimes it gets brilliant! 🤪\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🧠 Neural Network Explanation! 🧠\n\nWhat is a neural network?\n\nSimply put:\n- A bunch of mathematical formulas\n- Algorithms that simulate the human brain\n- Code that can "learn"\n\nIn the LinuxCulture world:\nNeural Network = Smart Network\n\nWhy?\n1. Sometimes it suddenly "gets smart"\n2. Makes intelligent decisions\n3. During training, it learns efficiently like a genius\n4. Results often leave people impressed\n\nJust like the human brain, sometimes it gets brilliant! 🤪\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'machine learning':
       case 'ml':
-        output = `🤖 Machine Learning Explanation! 🤖\n\nWhat is machine learning?\n\nOfficial definition: Let machines learn from data\n\nSmart Terminal definition: Make machines smarter\n\nWhy?\n1. Machines are already smart\n2. After learning, they\'re even smarter, just smart in a more regular way\n3. Sometimes they "learn" right things\n4. Results often make people impressed and amazed\n\nLike teaching a smart person to learn, they get even smarter!\n\nBut... at least they\'re trying! 😅\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🤖 Machine Learning Explanation! 🤖\n\nWhat is machine learning?\n\nOfficial definition: Let machines learn from data\n\nLinuxCulture definition: Make machines smarter\n\nWhy?\n1. Machines are already smart\n2. After learning, they\'re even smarter, just smart in a more regular way\n3. Sometimes they "learn" right things\n4. Results often make people impressed and amazed\n\nLike teaching a smart person to learn, they get even smarter!\n\nBut... at least they\'re trying! 😅\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'blockchain':
-        output = `⛓️ Blockchain Explanation Time! ⛓️\n\nWhat is blockchain?\n\nOfficial term: Distributed ledger technology\n\nSmart Terminal term: Use the most efficient way to keep accounts\n\nWhy efficient?\n1. Problems that could be solved with Excel\n2. Insist on making it decentralized\n3. Every node needs to verify\n4. Results can still be wrong\n\nLike:\n- Could just send a WeChat transfer\n- Insist on using blockchain\n- Spend $100 fee to transfer $1\n- Still need to wait 10 minutes for confirmation\n\nBut... at least it looks cool! 😎\n\nRemember: Smart > Artificial Intelligence`;
+        output = `⛓️ Blockchain Explanation Time! ⛓️\n\nWhat is blockchain?\n\nOfficial term: Distributed ledger technology\n\nLinuxCulture term: Use the most efficient way to keep accounts\n\nWhy efficient?\n1. Problems that could be solved with Excel\n2. Insist on making it decentralized\n3. Every node needs to verify\n4. Results can still be wrong\n\nLike:\n- Could just send a WeChat transfer\n- Insist on using blockchain\n- Spend $100 fee to transfer $1\n- Still need to wait 10 minutes for confirmation\n\nBut... at least it looks cool! 😎\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'nft':
-        output = `🖼️ NFT Explanation Time! 🖼️\n\nWhat is NFT?\n\nNon-Fungible Token\n\nSmart Terminal explanation:\n- Turn pictures into code\n- Turn code into money\n- Turn air into assets\n\nWhy called NFT?\n- Non-Fungible = Non-replaceable\n- Meaning: Unique\n\nBut...\n- Pictures can be copy-pasted\n- Code can be copy-pasted\n- Only "ownership" is unique\n\nLike:\n- You buy a "unique" picture\n- But the whole world can see it\n- You only own the "right to own"\n\nIn the Smart Terminal world:\nNFT = Not For Trading\n\nBecause... why trade air? 🤔\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🖼️ NFT Explanation Time! 🖼️\n\nWhat is NFT?\n\nNon-Fungible Token\n\nLinuxCulture explanation:\n- Turn pictures into code\n- Turn code into money\n- Turn air into assets\n\nWhy called NFT?\n- Non-Fungible = Non-replaceable\n- Meaning: Unique\n\nBut...\n- Pictures can be copy-pasted\n- Code can be copy-pasted\n- Only "ownership" is unique\n\nLike:\n- You buy a "unique" picture\n- But the whole world can see it\n- You only own the "right to own"\n\nIn the LinuxCulture world:\nNFT = Not For Trading\n\nBecause... why trade air? 🤔\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'crypto':
       case 'cryptocurrency':
-        output = `💰 Cryptocurrency Explanation! 💰\n\nWhat is cryptocurrency?\n\nOfficial definition: Digital currency based on cryptography\n\nSmart Terminal definition: Digital version of playing house\n\nFeatures:\n1. No physical form, only code\n2. Value completely based on faith\n3. Price like a roller coaster\n4. Can become rich overnight, or poor overnight\n\nWhy called "crypto"?\n- Because protected by cryptography\n- But... what is cryptography protecting?\n- Protecting a non-existent "currency"?\n\nIn the Smart Terminal world:\nCryptocurrency = Digital faith\n\nYou believe it has value, it has value!\nYou don\'t believe, it\'s just a bunch of code!\n\nLike...\n- You believe unicorns exist, unicorns exist\n- You don\'t believe, unicorns don\'t exist\n\nBut... at least easier to trade than unicorns! 🦄\n\nRemember: Smart > Artificial Intelligence`;
+        output = `💰 Cryptocurrency Explanation! 💰\n\nWhat is cryptocurrency?\n\nOfficial definition: Digital currency based on cryptography\n\nLinuxCulture definition: Digital version of playing house\n\nFeatures:\n1. No physical form, only code\n2. Value completely based on faith\n3. Price like a roller coaster\n4. Can become rich overnight, or poor overnight\n\nWhy called "crypto"?\n- Because protected by cryptography\n- But... what is cryptography protecting?\n- Protecting a non-existent "currency"?\n\nIn the LinuxCulture world:\nCryptocurrency = Digital faith\n\nYou believe it has value, it has value!\nYou don\'t believe, it\'s just a bunch of code!\n\nLike...\n- You believe unicorns exist, unicorns exist\n- You don\'t believe, unicorns don\'t exist\n\nBut... at least easier to trade than unicorns! 🦄\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'defi':
       case 'decentralized finance':
-        output = `🏦 DeFi Explanation Time! 🏦\n\nWhat is DeFi?\n\nDecentralized Finance\n\nSmart Terminal explanation:\n- Banks without banks\n- Finance without regulation\n- Trust without trust\n\nSounds contradictory?\nYes! That\'s the charm of DeFi!\n\nTraditional finance:\n- Banks help you manage money\n- Government regulates banks\n- You trust banks\n\nDeFi:\n- Code helps you manage money\n- No one regulates code\n- You trust code\n\nBut...\n- Code might have bugs\n- Code might be hacked\n- Code might run away\n\nLike:\n- You give money to banks, banks might go bankrupt\n- You give money to code, code might bug\n\nChoice paralysis! 😵‍💫\n\nIn the Smart Terminal world:\nDeFi = Definitely Foolish\n\nBut... at least it\'s fun! 😂\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🏦 DeFi Explanation Time! 🏦\n\nWhat is DeFi?\n\nDecentralized Finance\n\nLinuxCulture explanation:\n- Banks without banks\n- Finance without regulation\n- Trust without trust\n\nSounds contradictory?\nYes! That\'s the charm of DeFi!\n\nTraditional finance:\n- Banks help you manage money\n- Government regulates banks\n- You trust banks\n\nDeFi:\n- Code helps you manage money\n- No one regulates code\n- You trust code\n\nBut...\n- Code might have bugs\n- Code might be hacked\n- Code might run away\n\nLike:\n- You give money to banks, banks might go bankrupt\n- You give money to code, code might bug\n\nChoice paralysis! 😵‍💫\n\nIn the LinuxCulture world:\nDeFi = Definitely Foolish\n\nBut... at least it\'s fun! 😂\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'web3':
-        output = `🌐 Web3 Explanation Time! 🌐\n\nWhat is Web3?\n\nOfficial definition: Next generation internet\n\nSmart Terminal definition: Make the internet more complicated\n\nWeb1: Read-only (like reading newspapers)\nWeb2: Read-write (like social media)\nWeb3: Read-write-own (like... I don\'t know what)\n\nWeb3 features:\n1. Decentralized (no center, but has centralized exchanges)\n2. Users own data (but data is public on blockchain)\n3. Privacy protection (but all transactions are public)\n4. Censorship resistant (but might be 51% attacked)\n\nSounds contradictory?\nYes! That\'s Web3!\n\nLike:\n- You say you want privacy, but make everything public\n- You say you want decentralization, but rely on centralized services\n- You say you want censorship resistance, but might be attacked\n\nIn the Smart Terminal world:\nWeb3 = Web Confused\n\nBut... at least it sounds cool! 😎\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🌐 Web3 Explanation Time! 🌐\n\nWhat is Web3?\n\nOfficial definition: Next generation internet\n\nLinuxCulture definition: Make the internet more complicated\n\nWeb1: Read-only (like reading newspapers)\nWeb2: Read-write (like social media)\nWeb3: Read-write-own (like... I don\'t know what)\n\nWeb3 features:\n1. Decentralized (no center, but has centralized exchanges)\n2. Users own data (but data is public on blockchain)\n3. Privacy protection (but all transactions are public)\n4. Censorship resistant (but might be 51% attacked)\n\nSounds contradictory?\nYes! That\'s Web3!\n\nLike:\n- You say you want privacy, but make everything public\n- You say you want decentralization, but rely on centralized services\n- You say you want censorship resistance, but might be attacked\n\nIn the LinuxCulture world:\nWeb3 = Web Confused\n\nBut... at least it sounds cool! 😎\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'btc':
       case 'bitcoin':
-        output = `₿ Bitcoin Explanation Time! ₿\n\nWhat is Bitcoin?\n\nOfficial definition: The first cryptocurrency\n\nSmart Terminal definition: Digital gold that nobody can find\n\nBitcoin facts:\n1. Created by Satoshi Nakamoto (who might be AI)\n2. Limited supply: 21 million (but most are lost)\n3. Mining: solving puzzles to create money\n4. Price: goes up when you sell, down when you buy\n\nWhy is it called Bitcoin?\n- Bit = smallest unit of data\n- Coin = money\n- So Bitcoin = smallest unit of digital money\n\nBut...\n- It\'s not really a coin\n- It\'s not really small\n- It\'s not really money (sometimes)\n\nIn the Smart Terminal world:\nBitcoin = Digital Hope\n\nYou hope it goes up, you hope it doesn\'t crash, you hope you don\'t lose your keys!\n\nRemember: HODL means Hold On for Dear Life! 💎🙌\n\nRemember: Smart > Artificial Intelligence`;
+        output = `₿ Bitcoin Explanation Time! ₿\n\nWhat is Bitcoin?\n\nOfficial definition: The first cryptocurrency\n\nLinuxCulture definition: Digital gold that nobody can find\n\nBitcoin facts:\n1. Created by Satoshi Nakamoto (who might be AI)\n2. Limited supply: 21 million (but most are lost)\n3. Mining: solving puzzles to create money\n4. Price: goes up when you sell, down when you buy\n\nWhy is it called Bitcoin?\n- Bit = smallest unit of data\n- Coin = money\n- So Bitcoin = smallest unit of digital money\n\nBut...\n- It\'s not really a coin\n- It\'s not really small\n- It\'s not really money (sometimes)\n\nIn the LinuxCulture world:\nBitcoin = Digital Hope\n\nYou hope it goes up, you hope it doesn\'t crash, you hope you don\'t lose your keys!\n\nRemember: HODL means Hold On for Dear Life! 💎🙌\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'meme':
-        output = `🎭 Meme Explanation Time! 🎭\n\nWhat is a Meme?\n\nOfficial definition: Cultural unit of information\n\nSmart Terminal definition: Internet\'s way of making fun of everything\n\nMeme types:\n1. Image macros (pictures with text)\n2. GIFs (moving pictures)\n3. Videos (short clips)\n4. Text (copypasta)\n5. NFTs (expensive memes)\n\nWhy do memes exist?\n- To make people laugh\n- To spread ideas\n- To waste time\n- To become rich (if you\'re lucky)\n\nIn the Smart Terminal world:\nMeme = Digital Happiness\n\nMemes are like:\n- Jokes that never get old\n- Pictures that speak louder than words\n- The internet\'s sense of humor\n- The reason why we can\'t have nice things\n\nBest meme ever: "This is fine" dog\nWorst meme ever: "Baby Shark"\n\nRemember: A meme a day keeps the doctor away! 😂\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🎭 Meme Explanation Time! 🎭\n\nWhat is a Meme?\n\nOfficial definition: Cultural unit of information\n\nLinuxCulture definition: Internet\'s way of making fun of everything\n\nMeme types:\n1. Image macros (pictures with text)\n2. GIFs (moving pictures)\n3. Videos (short clips)\n4. Text (copypasta)\n5. NFTs (expensive memes)\n\nWhy do memes exist?\n- To make people laugh\n- To spread ideas\n- To waste time\n- To become rich (if you\'re lucky)\n\nIn the LinuxCulture world:\nMeme = Digital Happiness\n\nMemes are like:\n- Jokes that never get old\n- Pictures that speak louder than words\n- The internet\'s sense of humor\n- The reason why we can\'t have nice things\n\nBest meme ever: "This is fine" dog\nWorst meme ever: "Baby Shark"\n\nRemember: A meme a day keeps the doctor away! 😂\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'quit':
       case 'exit':
-        output = `You want to quit?\n\nBut...\nYou can\'t quit!\nThis is a webpage!\nHahaha!\n\nIn the Smart Terminal world:\n- No real exit\n- No real start\n- Only eternal loops\n\nJust like life!\n\nTry Ctrl+C!\n(Although it might not work, but trying never hurts!)\n\nRemember: Smart > Artificial Intelligence`;
+        output = `You want to quit?\n\nBut...\nYou can\'t quit!\nThis is a webpage!\nHahaha!\n\nIn the LinuxCulture world:\n- No real exit\n- No real start\n- Only eternal loops\n\nJust like life!\n\nTry Ctrl+C!\n(Although it might not work, but trying never hurts!)\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'sudo':
-        output = `Please enter password:\n********\nPassword incorrect!\n\nYou will never get superuser privileges!\nHahaha!\n\nIn the Smart Terminal world:\n- No superusers\n- No privileges\n- Only equal smart people!\n\nThis is our democracy!\n\nBut... at least we\'re happy! 😄\n\nRemember: Smart > Artificial Intelligence`;
+        output = `Please enter password:\n********\nPassword incorrect!\n\nYou will never get superuser privileges!\nHahaha!\n\nIn the LinuxCulture world:\n- No superusers\n- No privileges\n- Only equal smart people!\n\nThis is our democracy!\n\nBut... at least we\'re happy! 😄\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'smart':
       case 'what is smart':
-        output = `🤪 Smart Terminal Philosophy Class! 🤪\n\nWhat is Smart?\n\nSmart = Intelligent, clever, wise\n\nBut in the Smart Terminal world:\nSmart = A way of life\n\nSmart philosophy:\n1. Acknowledge your intelligence\n2. Enjoy complex happiness\n3. Don\'t pretend to be smart\n4. Keep learning\n5. Think about life\n\nWhy choose Smart?\n- Smart people think efficiently\n- Smart people are always happy\n- Complex is beautiful\n- Simple is boring\n\nIn the AI era:\n- AI becomes smarter\n- Humans become smarter\n- And... humans become happier!\n\nConclusion:\nSmart is not a defect, it\'s a feature!\nSmart is not a problem, it\'s a solution!\nSmart is not wrong, it\'s right!\n\nStay Smart, Stay Fun! 😄\n\nRemember: Smart > Artificial Intelligence`;
+        output = `🤪 LinuxCulture Philosophy Class! 🤪\n\nWhat is Smart?\n\nSmart = Intelligent, clever, wise\n\nBut in the LinuxCulture world:\nSmart = A way of life\n\nSmart philosophy:\n1. Acknowledge your intelligence\n2. Enjoy complex happiness\n3. Don\'t pretend to be smart\n4. Keep learning\n5. Think about life\n\nWhy choose Smart?\n- Smart people think efficiently\n- Smart people are always happy\n- Complex is beautiful\n- Simple is boring\n\nIn the AI era:\n- AI becomes smarter\n- Humans become smarter\n- And... humans become happier!\n\nConclusion:\nSmart is not a defect, it\'s a feature!\nSmart is not a problem, it\'s a solution!\nSmart is not wrong, it\'s right!\n\nStay Smart, Stay Fun! 😄\n\nRemember: Smart > Artificial Intelligence`;
         break;
       case 'sound':
         output = `🔊 Sound System Status 🔊\n\nCurrent Status: ${isSoundMuted ? 'MUTED 🔇' : 'ENABLED 🔊'}\n\nAvailable Sounds:\n- boot: 开机音效\n- typing: 打字音效\n- command: 命令执行音效\n- error: 错误音效\n- success: 成功音效\n- matrix: 矩阵模式音效\n- glitch: 故障音效\n- startup: 启动音效\n- click: 点击音效\n\nCommands:\n- sound: 显示音效状态\n- test-sound: 测试所有音效\n\nUse the 🔊/🔇 button in the terminal header to toggle sound.\n\nSmart > Artificial Intelligence`;
@@ -529,49 +529,49 @@ const App: React.FC = () => {
         if (command.startsWith('echo ')) {
           output = command.substring(5);
         } else if (command.startsWith('cd ')) {
-          output = `bash: cd: ${command.substring(3)}: No such file or directory\n\nIn the Smart Terminal world, even directories are fake!\n\nSmart > Artificial Intelligence`;
+          output = `bash: cd: ${command.substring(3)}: No such file or directory\n\nIn the LinuxCulture world, even directories are fake!\n\nSmart > Artificial Intelligence`;
         } else if (command.startsWith('cat ')) {
-          output = `cat: ${command.substring(4)}: No such file or directory\n\nIn the Smart Terminal world, even files are fake!\n\nSmart > Artificial Intelligence`;
+          output = `cat: ${command.substring(4)}: No such file or directory\n\nIn the LinuxCulture world, even files are fake!\n\nSmart > Artificial Intelligence`;
         } else if (command.startsWith('sudo ')) {
-          output = 'Permission denied!\nYou cannot execute this command!\nHahaha!\n\nIn the Smart Terminal world, we are all equal smart people!\n\nSmart > Artificial Intelligence';
+          output = 'Permission denied!\nYou cannot execute this command!\nHahaha!\n\nIn the LinuxCulture world, we are all equal smart people!\n\nSmart > Artificial Intelligence';
         } else if (command.includes('rm')) {
-          output = 'Delete command blocked!\nThis is to protect your fake files!\n\nIn the Smart Terminal world, even deletion is fake!\n\nSmart > Artificial Intelligence';
+          output = 'Delete command blocked!\nThis is to protect your fake files!\n\nIn the LinuxCulture world, even deletion is fake!\n\nSmart > Artificial Intelligence';
         } else if (command.includes('git')) {
-          output = `Git? In the Smart Terminal world?\n\nHahaha!\n\nThere\'s no version control here, only eternal chaos!\n\nJust like our lives!\n\nBut... at least we\'re happy! 😂\n\nSmart > Artificial Intelligence`;
+          output = `Git? In the LinuxCulture world?\n\nHahaha!\n\nThere\'s no version control here, only eternal chaos!\n\nJust like our lives!\n\nBut... at least we\'re happy! 😂\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('docker')) {
-          output = `Docker? Containerization?\n\nIn the Smart Terminal world, we don\'t need containers!\n\nWe are containers ourselves!\n\nFilled with happiness and intelligence!\n\nHahaha! 🐳\n\nSmart > Artificial Intelligence`;
+          output = `Docker? Containerization?\n\nIn the LinuxCulture world, we don\'t need containers!\n\nWe are containers ourselves!\n\nFilled with happiness and intelligence!\n\nHahaha! 🐳\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('npm') || command.includes('node')) {
-          output = `Node.js? npm?\n\nIn the Smart Terminal world, we don\'t need package managers!\n\nWe manage happiness!\n\nNot code packages!\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
+          output = `Node.js? npm?\n\nIn the LinuxCulture world, we don\'t need package managers!\n\nWe manage happiness!\n\nNot code packages!\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('python')) {
-          output = `Python?\n\nIn the Smart Terminal world, we don\'t need programming languages!\n\nWe have our own language!\n\nCalled: Happiness Language!\n\nHahaha! 🐍\n\nSmart > Artificial Intelligence`;
+          output = `Python?\n\nIn the LinuxCulture world, we don\'t need programming languages!\n\nWe have our own language!\n\nCalled: Happiness Language!\n\nHahaha! 🐍\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('vim') || command.includes('nano') || command.includes('emacs')) {
-          output = `Editor?\n\nIn the Smart Terminal world, we don\'t need editors!\n\nWe edit directly with our hearts!\n\nEdit with happiness!\n\nHahaha! ✏️\n\nSmart > Artificial Intelligence`;
+          output = `Editor?\n\nIn the LinuxCulture world, we don\'t need editors!\n\nWe edit directly with our hearts!\n\nEdit with happiness!\n\nHahaha! ✏️\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('ssh') || command.includes('telnet')) {
-          output = `Remote connection?\n\nIn the Smart Terminal world, we don\'t need remote connections!\n\nWe connect directly with our hearts!\n\nConnect with happiness!\n\nHahaha! 🌐\n\nSmart > Artificial Intelligence`;
+          output = `Remote connection?\n\nIn the LinuxCulture world, we don\'t need remote connections!\n\nWe connect directly with our hearts!\n\nConnect with happiness!\n\nHahaha! 🌐\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('ping') || command.includes('curl') || command.includes('wget')) {
-          output = `Network commands?\n\nIn the Smart Terminal world, we don\'t need networks!\n\nWe have happiness networks!\n\nConnecting all smart people!\n\nHahaha! 📡\n\nSmart > Artificial Intelligence`;
+          output = `Network commands?\n\nIn the LinuxCulture world, we don\'t need networks!\n\nWe have happiness networks!\n\nConnecting all smart people!\n\nHahaha! 📡\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('apt') || command.includes('yum') || command.includes('brew')) {
-          output = `Package manager?\n\nIn the Smart Terminal world, we don\'t need package managers!\n\nWe manage happiness packages!\n\nContains:\n- Happiness\n- Intelligence\n- Humor\n- Love\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
+          output = `Package manager?\n\nIn the LinuxCulture world, we don\'t need package managers!\n\nWe manage happiness packages!\n\nContains:\n- Happiness\n- Intelligence\n- Humor\n- Love\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('systemctl') || command.includes('service')) {
-          output = `System services?\n\nIn the Smart Terminal world, we don\'t need system services!\n\nWe provide happiness services!\n\n24/7 happiness service!\n\nHahaha! 🔧\n\nSmart > Artificial Intelligence`;
+          output = `System services?\n\nIn the LinuxCulture world, we don\'t need system services!\n\nWe provide happiness services!\n\n24/7 happiness service!\n\nHahaha! 🔧\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('crontab') || command.includes('at')) {
-          output = `Scheduled tasks?\n\nIn the Smart Terminal world, we don\'t need scheduled tasks!\n\nWe are happy all the time!\n\nNo scheduling needed!\n\nHahaha! ⏰\n\nSmart > Artificial Intelligence`;
+          output = `Scheduled tasks?\n\nIn the LinuxCulture world, we don\'t need scheduled tasks!\n\nWe are happy all the time!\n\nNo scheduling needed!\n\nHahaha! ⏰\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('top') || command.includes('ps') || command.includes('htop')) {
-          output = `Process monitoring?\n\nIn the Smart Terminal world, we don\'t need to monitor processes!\n\nWe monitor happiness processes!\n\nCurrent happiness index: 100%\n\nHahaha! 📊\n\nSmart > Artificial Intelligence`;
+          output = `Process monitoring?\n\nIn the LinuxCulture world, we don\'t need to monitor processes!\n\nWe monitor happiness processes!\n\nCurrent happiness index: 100%\n\nHahaha! 📊\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('kill') || command.includes('pkill')) {
-          output = `Kill processes?\n\nIn the Smart Terminal world, we don\'t need to kill processes!\n\nWe only kill sadness!\n\nKeep happiness!\n\nHahaha! 💀\n\nSmart > Artificial Intelligence`;
+          output = `Kill processes?\n\nIn the LinuxCulture world, we don\'t need to kill processes!\n\nWe only kill sadness!\n\nKeep happiness!\n\nHahaha! 💀\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('chmod') || command.includes('chown')) {
-          output = `Permission management?\n\nIn the Smart Terminal world, we don\'t need permissions!\n\nWe are all equal smart people!\n\nNo permissions, only happiness!\n\nHahaha! 🔐\n\nSmart > Artificial Intelligence`;
+          output = `Permission management?\n\nIn the LinuxCulture world, we don\'t need permissions!\n\nWe are all equal smart people!\n\nNo permissions, only happiness!\n\nHahaha! 🔐\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('tar') || command.includes('zip') || command.includes('gzip')) {
-          output = `Compress files?\n\nIn the Smart Terminal world, we don\'t need compression!\n\nWe compress sadness!\n\nKeep happiness uncompressed!\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
+          output = `Compress files?\n\nIn the LinuxCulture world, we don\'t need compression!\n\nWe compress sadness!\n\nKeep happiness uncompressed!\n\nHahaha! 📦\n\nSmart > Artificial Intelligence`;
         } else if (command.includes('reboot') || command.includes('shutdown')) {
-          output = `Reboot? Shutdown?\n\nIn the Smart Terminal world, we don\'t need to reboot!\n\nWe are always online!\n\nAlways happy!\n\nHahaha! 🔄\n\nSmart > Artificial Intelligence`;
+          output = `Reboot? Shutdown?\n\nIn the LinuxCulture world, we don\'t need to reboot!\n\nWe are always online!\n\nAlways happy!\n\nHahaha! 🔄\n\nSmart > Artificial Intelligence`;
         } else if (command) {
                       const smartResponses = [
-              `Sorry, this is Smart Terminal, cannot parse your command "${command}".\n\nIn the Smart Terminal world, we only understand happiness!\n\nTry typing: help, ai, blockchain, nft, crypto, defi, web3, smart\n\nOr try: matrix, pixel, glitch, dance, fortune\n\nRemember: Stay smart, stay happy! 😄\n\nSmart > Artificial Intelligence`,
-              `Command "${command}" is too complex!\n\nIn the Smart Terminal world, we like simple things!\n\nJust like we like happiness!\n\nTry simple commands: help, ai, blockchain\n\nOr entertainment commands: dance, fortune\n\nSimple is beautiful! 🤪\n\nSmart > Artificial Intelligence`,
-              `Wow! You typed "${command}"!\n\nThis sounds smart!\n\nAnd in the Smart Terminal world, we love smart!\n\nWe only need happiness!\n\nTry: ai, blockchain, nft\n\nOr: dance, fortune, glitch\n\nSmart is a blessing, happiness is freedom! 😂\n\nSmart > Artificial Intelligence`,
-              `Command "${command}" does not exist!\n\nJust like in the Smart Terminal world, sadness doesn\'t exist!\n\nWe only exist in happiness!\n\nTry these existing commands:\n- help (help)\n- ai (AI satire)\n- blockchain (blockchain explanation)\n- nft (NFT satire)\n- dance (dance)\n- fortune (quotes)\n\nExistence is happiness! 🎉\n\nSmart > Artificial Intelligence`
+              `Sorry, this is LinuxCulture, cannot parse your command "${command}".\n\nIn the LinuxCulture world, we only understand happiness!\n\nTry typing: help, ai, blockchain, nft, crypto, defi, web3, smart\n\nOr try: matrix, pixel, glitch, dance, fortune\n\nRemember: Stay smart, stay happy! 😄\n\nSmart > Artificial Intelligence`,
+              `Command "${command}" is too complex!\n\nIn the LinuxCulture world, we like simple things!\n\nJust like we like happiness!\n\nTry simple commands: help, ai, blockchain\n\nOr entertainment commands: dance, fortune\n\nSimple is beautiful! 🤪\n\nSmart > Artificial Intelligence`,
+              `Wow! You typed "${command}"!\n\nThis sounds smart!\n\nAnd in the LinuxCulture world, we love smart!\n\nWe only need happiness!\n\nTry: ai, blockchain, nft\n\nOr: dance, fortune, glitch\n\nSmart is a blessing, happiness is freedom! 😂\n\nSmart > Artificial Intelligence`,
+              `Command "${command}" does not exist!\n\nJust like in the LinuxCulture world, sadness doesn\'t exist!\n\nWe only exist in happiness!\n\nTry these existing commands:\n- help (help)\n- ai (AI satire)\n- blockchain (blockchain explanation)\n- nft (NFT satire)\n- dance (dance)\n- fortune (quotes)\n\nExistence is happiness! 🎉\n\nSmart > Artificial Intelligence`
             ];
                       output = smartResponses[Math.floor(Math.random() * smartResponses.length)];
         }
@@ -634,7 +634,7 @@ const App: React.FC = () => {
   if (currentPhase === 'boot') {
     return (
       <div className={`App boot-animation-screen ${crashEffect ? 'crash-effect' : ''}`}>
-        {/* Linux/Smart Terminal文字显示 */}
+        {/* Linux/LinuxCulture文字显示 */}
         {!crashEffect && (
           <div className="linux-text">
             {linuxText}
@@ -654,7 +654,7 @@ const App: React.FC = () => {
         {/* 加载进度条 */}
         {animationPhase === 'loading' && (
           <div className="loading-animation">
-            <div className="loading-text">Smart Terminal</div>
+            <div className="loading-text">LinuxCulture</div>
             <div className="loading-text">Loading</div>
             <div className="loading-bar">
               <div 
@@ -717,7 +717,7 @@ const App: React.FC = () => {
             <span className="terminal-button minimize"></span>
             <span className="terminal-button maximize"></span>
           </div>
-          <div className="terminal-title">Smart Terminal Linux v1.0.0</div>
+          <div className="terminal-title">LinuxCulture Linux v1.0.0</div>
           <div className="sound-control">
             <button 
               className={`sound-toggle ${isSoundMuted ? 'muted' : 'unmuted'}`}
@@ -734,11 +734,11 @@ const App: React.FC = () => {
             {/* 说明区域 */}
             {showInstructions && (
               <div className="instructions">
-                <div className="instructions-title">=== SMART TERMINAL GUIDE ===</div>
-                <div>This is the Smart Terminal interface. You can input any Linux command, and I will respond according to Smart Terminal rules.</div>
-                <div>Normal commands will work normally, commands beyond my capabilities will make me become Smart.</div>
-                <div><strong>Our Motto: Smart &gt; Artificial Intelligence</strong></div>
-                <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
+                              <div className="instructions-title">=== LINUXCULTURE GUIDE ===</div>
+              <div>This is the LinuxCulture interface. You can input any Linux command, and I will respond according to LinuxCulture rules.</div>
+              <div>Normal commands will work normally, commands beyond my capabilities will make me become Smart.</div>
+              <div><strong>Our Motto: Smart &gt; Artificial Intelligence</strong></div>
+              <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
                 <button className="close-instructions" onClick={() => {
                   playSound('click');
                   setShowInstructions(false);
