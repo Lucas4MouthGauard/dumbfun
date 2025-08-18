@@ -413,7 +413,7 @@ const App: React.FC = () => {
               case 'ca':
       case 'Ca':
       case 'CA':
-          output = 'Coming Soon';
+          output = '34RuW2ZdP2HmXezXn91Hh8fXFoTQEQudi2q4nitLpump';
         break;
       case 'x':
       case 'twitter':
