@@ -71,7 +71,7 @@ const App: React.FC = () => {
   const [glitchEffect, setGlitchEffect] = useState(false);
   const [matrixRain, setMatrixRain] = useState<string[]>([]);
   const [pixelArt, setPixelArt] = useState<string[]>([]);
-  const [currentUser] = useState('linuxpump');
+  const [currentUser] = useState('LLMonLinux');
   const [currentHost] = useState('terminal');
   const [currentPath, setCurrentPath] = useState('~');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -417,6 +417,7 @@ const App: React.FC = () => {
         break;
       case 'x':
       case 'twitter':
+        
         output = '@https://x.com/LLMonLinux';
         break;
       case '$vinedoge':
