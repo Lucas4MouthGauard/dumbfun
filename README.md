@@ -1,4 +1,4 @@
-# LinuxCulture 🤪 - Retro Command Line Style Smart Terminal
+# Smart Terminal 🤪 - Retro Command Line Style Smart Terminal
 
 A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 

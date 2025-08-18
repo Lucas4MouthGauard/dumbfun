@@ -1,6 +1,6 @@
 {
-  "short_name": "LinuxCulture",
-  "name": "LinuxCulture",
+  "short_name": "Smart Terminal",
+  "name": "Smart Terminal",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "images/linuxcul.png",
+      "src": "images/linuxpump.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/linuxcul.png",
+      "src": "images/linuxpump.png",
       "type": "image/png",
       "sizes": "512x512"
     }
