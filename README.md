@@ -1,4 +1,4 @@
-# PenguinCult LoadingLLM 🤪 - Retro Command Line Style PenguinCult LoadingLLM
+# DumbFun Loading LLM 🤪 - Retro Command Line Style DumbFun Loading LLM
 
 A completely redesigned retro command line style React web application, combining pixel art animations and matrix rain effects, elevating "smart" interactions to new heights!
 

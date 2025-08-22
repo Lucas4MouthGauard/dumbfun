@@ -202,7 +202,7 @@ const App: React.FC = () => {
               // 播放启动音效
               playSound('startup');
               
-              const sillyDogeText = 'PenguinCult LoadingLLM';
+              const sillyDogeText = 'DumbFun Loading LLM';
       let currentIndex = 0;
       const interval = setInterval(() => {
         if (currentIndex <= sillyDogeText.length) {
@@ -263,7 +263,7 @@ const App: React.FC = () => {
     if (animationPhase === 'complete') {
       setTimeout(() => {
         setCommandVisible(true);
-        const command = '> run penguincult-loadingllm';
+        const command = '> run dumbfun-loading-llm';
         let currentIndex = 0;
         const interval = setInterval(() => {
           if (currentIndex <= command.length) {
@@ -308,7 +308,7 @@ const App: React.FC = () => {
       'Mounting file system...',
       'Starting network services...',
       'Initializing terminal...',
-      'Loading PenguinCult LoadingLLM modules...',
+      'Loading DumbFun Loading LLM modules...',
       'Starting happiness engine...',
       'Connecting to smart network...',
       'System startup complete!'
@@ -345,7 +345,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nPenguinCult LoadingLLM v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
+        output = `\nDumbFun Loading LLM v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
         break;
       case 'clear':
         setCommands([]);
@@ -417,7 +417,7 @@ const App: React.FC = () => {
         break;
       case 'x':
       case 'twitter':
-        output = '@https://x.com/LOADLLM';
+        output = '@https://x.com/DumbFun_pump';
         break;
       case '$vinedoge':
       case 'vinedoge':
@@ -654,7 +654,7 @@ const App: React.FC = () => {
         {/* 加载进度条 */}
         {animationPhase === 'loading' && (
           <div className="loading-animation">
-            <div className="loading-text">PenguinCult LoadingLLM</div>
+            <div className="loading-text">DumbFun Loading LLM</div>
             <div className="loading-text">Loading</div>
             <div className="loading-bar">
               <div 
@@ -717,7 +717,7 @@ const App: React.FC = () => {
             <span className="terminal-button minimize"></span>
             <span className="terminal-button maximize"></span>
           </div>
-          <div className="terminal-title">Loading LLM v1.0.0</div>
+          <div className="terminal-title">DumbFun Loading LLM v1.0.0</div>
           <div className="sound-control">
             <button 
               className={`sound-toggle ${isSoundMuted ? 'muted' : 'unmuted'}`}
@@ -734,8 +734,8 @@ const App: React.FC = () => {
             {/* 说明区域 */}
             {showInstructions && (
               <div className="instructions">
-                <div className="instructions-title">=== PENGUINCULT LOADINGLLM GUIDE ===</div>
-                <div>This is the PenguinCult LoadingLLM interface. You can input any Linux command, and I will respond according to PenguinCult LoadingLLM rules.</div>
+                <div className="instructions-title">=== DUMBFUN LOADING LLM GUIDE ===</div>
+                <div>This is the DumbFun Loading LLM interface. You can input any Linux command, and I will respond according to DumbFun Loading LLM rules.</div>
                 <div>Normal commands will work normally, commands beyond my capabilities will make me become Smart.</div>
                 <div><strong>Our Motto: Smart &gt; Artificial Intelligence</strong></div>
                 <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
