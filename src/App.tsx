@@ -417,7 +417,7 @@ const App: React.FC = () => {
         break;
       case 'x':
       case 'twitter':
-        output = '@https://x.com/DumbFun_pump';
+        output = '@https://x.com/llmonlinux_sol';
         break;
       case '$vinedoge':
       case 'vinedoge':
