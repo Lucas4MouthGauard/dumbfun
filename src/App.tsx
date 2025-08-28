@@ -416,8 +416,10 @@ const App: React.FC = () => {
           output = 'Coming Soon';
         break;
       case 'x':
+      case 'X':
       case 'twitter':
-        output = '@https://x.com/LLMonLinux_xyz';
+      case 'Twitter':
+        output = '@https://x.com/DumbFun_llm';
         break;
       case '$vinedoge':
       case 'vinedoge':
