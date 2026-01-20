@@ -77,10 +77,9 @@ const App: React.FC = () => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [showInstructions, setShowInstructions] = useState(true);
-  const [animationPhase, setAnimationPhase] = useState<'linux' | 'dumbfun' | 'crash' | 'loading' | 'complete'>('linux');
+  const [animationPhase, setAnimationPhase] = useState<'linuxllm' | 'loading' | 'complete'>('linuxllm');
   const [linuxText, setLinuxText] = useState('');
   const [brainExeVisible, setBrainExeVisible] = useState(false);
-  const [crashEffect, setCrashEffect] = useState(false);
   const [loadingBarProgress, setLoadingBarProgress] = useState(0);
   const [commandInput, setCommandInput] = useState('');
   const [commandVisible, setCommandVisible] = useState(false);
@@ -170,40 +169,17 @@ const App: React.FC = () => {
     }
   }, [commands, showInstructions, currentPhase]);
 
-  // Linux文字逐字显示动画
+  // Smart Terminal显示动画
   useEffect(() => {
-    if (animationPhase === 'linux') {
-      // 播放开机音效
-      playSound('boot');
+    if (animationPhase === 'linuxllm') {
+      // 播放启动音效
+      playSound('startup');
       
-      const linuxText = 'LINUX';
+      const sillyDogeText = 'LinuxLLM';
       let currentIndex = 0;
-      const interval = setInterval(() => {
-        if (currentIndex <= linuxText.length) {
-          setLinuxText(linuxText.substring(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(interval);
-          setTimeout(() => {
-            setLinuxText('');
-            setTimeout(() => {
-              setAnimationPhase('dumbfun');
-            }, 1000);
-          }, 2000);
-        }
-      }, 300);
-      return () => clearInterval(interval);
-    }
-  }, [animationPhase]);
-
-      // Smart Terminal显示动画
-  useEffect(() => {
-          if (animationPhase === 'dumbfun') {
-              // 播放启动音效
-              playSound('startup');
-              
-              const sillyDogeText = 'DumbFun Loading LLM';
-      let currentIndex = 0;
+      // 调整时间：18个字符，每个字符约150ms，总共约2.7s，加上等待0.3s = 3s
+      const charDelay = 150;
+      const totalTime = 3000; // 总时间3秒
       const interval = setInterval(() => {
         if (currentIndex <= sillyDogeText.length) {
           setBrainExeVisible(true);
@@ -211,28 +187,14 @@ const App: React.FC = () => {
           currentIndex++;
         } else {
           clearInterval(interval);
+          const elapsed = sillyDogeText.length * charDelay;
+          const remaining = totalTime - elapsed;
           setTimeout(() => {
-            setAnimationPhase('crash');
-          }, 2000);
+            setAnimationPhase('loading');
+          }, Math.max(0, remaining));
         }
-      }, 300);
+      }, charDelay);
       return () => clearInterval(interval);
-    }
-  }, [animationPhase]);
-
-  // 崩溃效果动画
-  useEffect(() => {
-    if (animationPhase === 'crash') {
-      // 播放错误音效
-      playSound('error');
-      
-      setCrashEffect(true);
-      setBrainExeVisible(false);
-      setLinuxText('');
-      setTimeout(() => {
-        setCrashEffect(false);
-        setAnimationPhase('loading');
-      }, 4000);
     }
   }, [animationPhase]);
 
@@ -240,20 +202,21 @@ const App: React.FC = () => {
   useEffect(() => {
     if (animationPhase === 'loading') {
       let progress = 0;
+      const totalTime = 3000; // 总时间3秒
+      const startTime = Date.now();
       const interval = setInterval(() => {
-        progress += Math.random() * 5;
-        if (progress >= 99) {
-          progress = 99;
-          clearInterval(interval);
-          setTimeout(() => {
-            setLoadingBarProgress(100);
-            setTimeout(() => {
-              setAnimationPhase('complete');
-            }, 1000);
-          }, 2000);
-        }
+        const elapsed = Date.now() - startTime;
+        progress = Math.min(99, (elapsed / totalTime) * 99);
         setLoadingBarProgress(progress);
-      }, 200);
+        
+        if (progress >= 99) {
+          clearInterval(interval);
+          setLoadingBarProgress(100);
+          setTimeout(() => {
+            setAnimationPhase('complete');
+          }, 500);
+        }
+      }, 50);
       return () => clearInterval(interval);
     }
   }, [animationPhase]);
@@ -263,8 +226,11 @@ const App: React.FC = () => {
     if (animationPhase === 'complete') {
       setTimeout(() => {
         setCommandVisible(true);
-        const command = '> run dumbfun-loading-llm';
+        const command = '> run linuxllm';
         let currentIndex = 0;
+        // 调整时间：24个字符，每个字符约120ms，总共约2.88s，加上等待0.12s = 3s
+        const charDelay = 120;
+        const totalTime = 3000; // 总时间3秒
         const interval = setInterval(() => {
           if (currentIndex <= command.length) {
             setCommandInput(command.substring(0, currentIndex));
@@ -273,14 +239,16 @@ const App: React.FC = () => {
             currentIndex++;
           } else {
             clearInterval(interval);
+            const elapsed = command.length * charDelay;
+            const remaining = totalTime - elapsed;
             setTimeout(() => {
               setCurrentPhase('loading');
               startLoadingSequence();
-            }, 1500);
+            }, Math.max(0, remaining));
           }
-        }, 150);
+        }, charDelay);
         return () => clearInterval(interval);
-      }, 1000);
+      }, 500);
     }
   }, [animationPhase]);
 
@@ -308,7 +276,7 @@ const App: React.FC = () => {
       'Mounting file system...',
       'Starting network services...',
       'Initializing terminal...',
-      'Loading DumbFun Loading LLM modules...',
+      'Loading LinuxLLM modules...',
       'Starting happiness engine...',
       'Connecting to smart network...',
       'System startup complete!'
@@ -345,7 +313,7 @@ const App: React.FC = () => {
     // 常见命令处理
     switch (command) {
       case 'help':
-        output = `\nDumbFun Loading LLM v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
+        output = `\nLinuxLLM v1.0.0 - The Smartest Terminal System 🤪\n\nAvailable commands:\nBasic commands: help, clear, whoami, pwd, ls, date\nEntertainment commands: matrix, pixel, glitch, dance, fortune\nAI related: ai, chatgpt, neural, machine\nWeb3 related: blockchain, nft, crypto, defi, web3, btc\nFun commands: meme, ca, vinedoge, goal\nSound commands: sound, test-sound\n\nSimple commands work normally, complex commands will be humorously rejected!\n\nTry typing: ai, blockchain, nft, btc, meme, vinedoge, goal and other fun commands!\n\nSound system is ${isSoundMuted ? 'MUTED' : 'ENABLED'} 🔊`;
         break;
       case 'clear':
         setCommands([]);
@@ -419,7 +387,7 @@ const App: React.FC = () => {
       case 'X':
       case 'twitter':
       case 'Twitter':
-        output = '@https://x.com/DumbFun_llm';
+        output = '@https://x.com/LinuxLLM';
         break;
       case '$vinedoge':
       case 'vinedoge':
@@ -635,28 +603,19 @@ const App: React.FC = () => {
   // 渲染开机动画界面
   if (currentPhase === 'boot') {
     return (
-      <div className={`App boot-animation-screen ${crashEffect ? 'crash-effect' : ''}`}>
-        {/* Linux/Smart Terminal文字显示 */}
-        {!crashEffect && (
+      <div className="App boot-animation-screen">
+        {/* Smart Terminal文字显示 */}
+        {animationPhase === 'linuxllm' && (
           <div className="linux-text">
             {linuxText}
             <span className="cursor-blink">|</span>
           </div>
         )}
         
-        {/* 崩溃效果 */}
-        {crashEffect && (
-          <div className="crash-overlay">
-            <div className="crash-text">MEMORY ERROR</div>
-            <div className="crash-text">SYSTEM CRASH</div>
-            <div className="crash-text">REBOOTING...</div>
-          </div>
-        )}
-        
         {/* 加载进度条 */}
         {animationPhase === 'loading' && (
           <div className="loading-animation">
-            <div className="loading-text">DumbFun Loading LLM</div>
+            <div className="loading-text">LinuxLLM</div>
             <div className="loading-text">Loading</div>
             <div className="loading-bar">
               <div 
@@ -719,7 +678,7 @@ const App: React.FC = () => {
             <span className="terminal-button minimize"></span>
             <span className="terminal-button maximize"></span>
           </div>
-          <div className="terminal-title">DumbFun Loading LLM v1.0.0</div>
+          <div className="terminal-title">LinuxLLM v1.0.0</div>
           <div className="sound-control">
             <button 
               className={`sound-toggle ${isSoundMuted ? 'muted' : 'unmuted'}`}
@@ -736,8 +695,8 @@ const App: React.FC = () => {
             {/* 说明区域 */}
             {showInstructions && (
               <div className="instructions">
-                <div className="instructions-title">=== DUMBFUN LOADING LLM GUIDE ===</div>
-                <div>This is the DumbFun Loading LLM interface. You can input any Linux command, and I will respond according to DumbFun Loading LLM rules.</div>
+                <div className="instructions-title">=== LINUXLLM GUIDE ===</div>
+                <div>This is the LinuxLLM interface. You can input any Linux command, and I will respond according to LinuxLLM rules.</div>
                 <div>Normal commands will work normally, commands beyond my capabilities will make me become Smart.</div>
                 <div><strong>Our Motto: Smart &gt; Artificial Intelligence</strong></div>
                 <div>Type <span className="instructions-cmd">help</span> to see available commands, or start typing commands directly!</div>
