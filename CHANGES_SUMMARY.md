@@ -1,33 +1,33 @@
-# 更改总结 - DumbFun Loading LLM 最终更新
+# 更改总结 - LinuxLLM Loading LLM 最终更新
 
 ## 🎯 主要更改概述
 
-本次更新将项目从 "PenguinCult LoadingLLM" 最终更新为 "DumbFun Loading LLM"，包括标题、推特链接和所有相关文本的全面更新。
+本次更新将项目从 "PenguinCult LoadingLLM" 最终更新为 "LinuxLLM Loading LLM"，包括标题、推特链接和所有相关文本的全面更新。
 
 ## 📝 详细更改记录
 
 ### 1. 标题更新
-- **public/index.html**: 页面标题从 "PenguinCult LoadingLLM" 改为 "DumbFun Loading LLM"
-- **public/manifest.json**: 应用名称从 "PenguinCult LoadingLLM" 改为 "DumbFun Loading LLM"
-- **src/App.tsx**: 终端标题从 "PenguinCult LoadingLLM v1.0.0" 改为 "DumbFun Loading LLM v1.0.0"
+- **public/index.html**: 页面标题从 "PenguinCult LoadingLLM" 改为 "LinuxLLM Loading LLM"
+- **public/manifest.json**: 应用名称从 "PenguinCult LoadingLLM" 改为 "LinuxLLM Loading LLM"
+- **src/App.tsx**: 终端标题从 "PenguinCult LoadingLLM v1.0.0" 改为 "LinuxLLM Loading LLM v1.0.0"
 
 ### 2. 项目名称更新
-- **package.json**: 项目名称从 `penguincult-loadingllm` 改为 `dumbfun-loading-llm`
-- **README.md**: 项目标题从 "PenguinCult LoadingLLM 🤪 - Retro Command Line Style PenguinCult LoadingLLM" 改为 "DumbFun Loading LLM 🤪 - Retro Command Line Style DumbFun Loading LLM"
+- **package.json**: 项目名称从 `penguincult-loadingllm` 改为 `linuxllm-loading-llm`
+- **README.md**: 项目标题从 "PenguinCult LoadingLLM 🤪 - Retro Command Line Style PenguinCult LoadingLLM" 改为 "LinuxLLM Loading LLM 🤪 - Retro Command Line Style LinuxLLM Loading LLM"
 
 ### 3. 开机命令更新
-- **src/App.tsx**: 开机命令从 `> run penguincult-loadingllm` 改为 `> run dumbfun-loading-llm`
+- **src/App.tsx**: 开机命令从 `> run penguincult-loadingllm` 改为 `> run linuxllm-loading-llm`
 
 ### 4. 动画文本更新
-- **src/App.tsx**: 加载动画文本从 "PenguinCult LoadingLLM" 改为 "DumbFun Loading LLM"
-- **src/App.tsx**: 加载步骤从 "Loading PenguinCult LoadingLLM modules..." 改为 "Loading DumbFun Loading LLM modules..."
+- **src/App.tsx**: 加载动画文本从 "PenguinCult LoadingLLM" 改为 "LinuxLLM Loading LLM"
+- **src/App.tsx**: 加载步骤从 "Loading PenguinCult LoadingLLM modules..." 改为 "Loading LinuxLLM Loading LLM modules..."
 
 ### 5. 说明区域更新
-- **src/App.tsx**: 说明区域标题从 "=== PENGUINCULT LOADINGLLM GUIDE ===" 改为 "=== DUMBFUN LOADING LLM GUIDE ==="
-- **src/App.tsx**: 说明区域描述从 "PenguinCult LoadingLLM interface" 改为 "DumbFun Loading LLM interface"
+- **src/App.tsx**: 说明区域标题从 "=== PENGUINCULT LOADINGLLM GUIDE ===" 改为 "=== LINUXLLM LOADING LLM GUIDE ==="
+- **src/App.tsx**: 说明区域描述从 "PenguinCult LoadingLLM interface" 改为 "LinuxLLM Loading LLM interface"
 
 ### 6. 命令输出更新
-- **src/App.tsx**: help 命令输出从 "PenguinCult LoadingLLM v1.0.0" 改为 "DumbFun Loading LLM v1.0.0"
+- **src/App.tsx**: help 命令输出从 "PenguinCult LoadingLLM v1.0.0" 改为 "LinuxLLM Loading LLM v1.0.0"
 - **src/App.tsx**: X/Twitter 命令输出从 `@https://x.com/LOADLLM` 改为 `@https://x.com/LLMonLinux_xyz`
 - **src/App.tsx**: CA 命令输出保持为 "Coming Soon"
 
@@ -59,16 +59,16 @@
 - 更新了 favicon 和 apple-touch-icon
 
 ### 新标题
-- 页面标题: "DumbFun Loading LLM"
-- 终端标题: "DumbFun Loading LLM v1.0.0"
-- 应用名称: "DumbFun Loading LLM"
+- 页面标题: "LinuxLLM Loading LLM"
+- 终端标题: "LinuxLLM Loading LLM v1.0.0"
+- 应用名称: "LinuxLLM Loading LLM"
 
 ## 🔧 命令系统更新
 
 ### 更新的命令
 - **X/Twitter**: 显示 `@https://x.com/LLMonLinux_xyz`
 - **CA**: 显示 "Coming Soon"
-- **项目名称**: 从 "PenguinCult LoadingLLM" 改为 "DumbFun Loading LLM"
+- **项目名称**: 从 "PenguinCult LoadingLLM" 改为 "LinuxLLM Loading LLM"
 
 ### 保持不变的设置
 - 用户名: `LoadingLLM`
@@ -89,9 +89,9 @@
 ## 🎯 最终状态
 
 ### 项目标识
-- **项目名称**: DumbFun Loading LLM
-- **应用标题**: DumbFun Loading LLM
-- **终端标题**: DumbFun Loading LLM v1.0.0
+- **项目名称**: LinuxLLM Loading LLM
+- **应用标题**: LinuxLLM Loading LLM
+- **终端标题**: LinuxLLM Loading LLM v1.0.0
 - **图标**: LoadingLLM.png
 
 ### 社交媒体链接
@@ -105,7 +105,7 @@
 
 ## 📋 检查清单
 
-- [x] 标题文案更新为 "DumbFun Loading LLM"
+- [x] 标题文案更新为 "LinuxLLM Loading LLM"
 - [x] 推特链接更新为 "@https://x.com/LLMonLinux_xyz"
 - [x] CA命令输出保持为 "Coming Soon"
 - [x] 所有相关文本同步更新

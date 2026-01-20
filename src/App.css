@@ -98,7 +98,7 @@ body {
   image-rendering: crisp-edges;
 }
 
-/* Linux/DumbFun文字显示 */
+/* Linux/LinuxLLM文字显示 */
 .linux-text {
   font-size: 36px;
   font-weight: bold;
