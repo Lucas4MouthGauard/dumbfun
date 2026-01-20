@@ -378,10 +378,10 @@ const App: React.FC = () => {
       case 'dance':
         output = `💃 Terminal starts dancing! 🕺\n\n(╯°□°）╯︵ ┻━┻\n(ノಠ益ಠ)ノ彡┻━┻\n(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n┻━┻ ︵ヽ(\`Д´)ﾉ︵﻿ ┻━┻\n\n🎵 In the Smart Terminal world, even terminals can dance! 🎵\n\nSmart > Artificial Intelligence`;
         break;
-              case 'ca':
+      case 'ca':
       case 'Ca':
       case 'CA':
-          output = 'Coming Soon';
+        output = '0xde8631c4aff43840112f216afd73f2441b0a4444';
         break;
       case 'x':
       case 'X':
